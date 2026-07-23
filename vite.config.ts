@@ -8,16 +8,19 @@ import babel from '@rolldown/plugin-babel'
 import tailwindcss from '@tailwindcss/vite'
 import { nitro } from 'nitro/vite'
 
+import yaml from '@rollup/plugin-yaml'
+
 const config = defineConfig({
-  resolve: { tsconfigPaths: true },
-  plugins: [
-    devtools(),
-    nitro({ rollupConfig: { external: [/^@sentry\//] } }),
-    tailwindcss(),
-    tanstackStart(),
-    viteReact(),
-    babel({ presets: [reactCompilerPreset()] }),
-  ],
+    resolve: { tsconfigPaths: true },
+    plugins: [
+        devtools(),
+        nitro({ rollupConfig: { external: [/^@sentry\//] } }),
+        tailwindcss(),
+        tanstackStart(),
+        viteReact(),
+        babel({ presets: [reactCompilerPreset()] }),
+        yaml(),
+    ],
 })
 
 export default config

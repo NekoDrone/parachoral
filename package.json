@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@rolldown/plugin-babel": "^0.2.3",
+    "@rollup/plugin-yaml": "^5.0.0",
     "@tailwindcss/typography": "^0.5.16",
     "@tanstack/devtools-vite": "latest",
     "@tanstack/eslint-config": "latest",
