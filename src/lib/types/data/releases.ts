@@ -1,11 +1,13 @@
 import { z } from "zod";
 
-export const Releases = z.array(
-    z.object({
-        slug: z.string(),
-        name: z.string(),
-        year: z.number().int(),
-    }),
-);
+export const Release = z.object({
+    slug: z.string(),
+    name: z.string(),
+    year: z.number().int(),
+});
+
+export type Release = z.infer<typeof Release>;
+
+export const Releases = z.array(Release);
 
 export type Releases = z.infer<typeof Releases>;
