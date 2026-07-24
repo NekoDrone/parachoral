@@ -1,3 +1,4 @@
+import { Sources } from "#/lib/types/data";
 import { z } from "zod";
 
 export const TrackTimestamp = z
@@ -18,7 +19,7 @@ export const TrackTimestamp = z
 export type TrackTimestamp = z.infer<typeof TrackTimestamp>;
 
 export const TrackMotifs = z.object({
-    motifSlug: z.string(), // slug → resolved against motif index below
+    motifSlug: z.string(), // slug → resolved against motif index
     origin: z.boolean().default(false), // ≤1 per motif across ALL tracks
     at: z.array(TrackTimestamp).min(1),
     note: z.string().optional(),
@@ -31,11 +32,11 @@ export const Track = z.object({
     title: z.string(),
     composers: z.array(z.string()).min(1),
     description: z.string().optional(),
-    links: z.record(z.string(), z.url()).optional(),
+    links: Sources.optional(),
     albums: z
         .array(
             z.object({
-                album: z.string(), // slug → album index
+                albumSlug: z.string(), // slug → album index
                 track: z.number().int().positive(),
             }),
         )
@@ -43,7 +44,7 @@ export const Track = z.object({
     playsIn: z
         .array(
             z.object({
-                in: z.string(), // slug → activity index
+                activitySlug: z.string(), // slug → activity index
                 note: z.string().optional(),
             }),
         )

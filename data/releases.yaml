@@ -1,3 +1,5 @@
+# Important: While the first entry is MotS, this file tracks game/expansion releases, not soundtrack/album releases.
+# For that, go to /data/albums/*.yaml.
 - slug: 0_music-of-the-spheres
   name: Music of the Spheres
   year: 2012

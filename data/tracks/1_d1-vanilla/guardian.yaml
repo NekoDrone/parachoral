@@ -10,10 +10,10 @@ links:
       url: https://www.youtube.com/watch?v=IOWqj7SXOEA
       note: This version on the Archive contains additional sounds before the beginning of the track as it is an archive of the full bootflow.
 albums:
-    - album: destiny-ost
+    - albumSlug: destiny-ost
       track: 6
 motifs:
-    - motif: guardian
+    - motifSlug: guardian
       origin: true
       at: ["0:05-0:12"]
       note: The definitive opening statement; solo horn over strings.
