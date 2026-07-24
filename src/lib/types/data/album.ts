@@ -3,7 +3,7 @@ import { z } from "zod";
 
 export const Album = z.object({
     title: z.string(),
-    released: z.iso.date(),
+    releasedAt: z.date(),
     links: Sources.optional(),
 });
 
