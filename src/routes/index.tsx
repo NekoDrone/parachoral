@@ -1,7 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import yestTrack from "../../data/tracks/journey.yaml";
-
 export const Route = createFileRoute("/")({ component: Home });
 
 function Home() {
@@ -11,7 +9,6 @@ function Home() {
             <p className="mt-4 text-lg">
                 Edit <code>src/routes/index.tsx</code> to get started.
             </p>
-            <p>{yestTrack.title}</p>
         </div>
     );
 }
