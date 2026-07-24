@@ -35,7 +35,7 @@ function Home() {
                         tagged, noted, and catalogued with all of its
                         marginalia. Each motif and idea found and brought into
                         the light from the dark. An archive of over a decade's worth of
-                        joy, grief, sorrow, anger, fear, hope, and knowledge.
+                        joy, grief, sorrow, anger, fear, knowledge, and hope.
                     </p>
                     <p className="mt-5 text-[17px] uppercase tracking-widest indent-[0.42em] text-gold">
                         Per Audacia ad Astra.
