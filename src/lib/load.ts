@@ -5,6 +5,7 @@ import { Motif } from "#/lib/types/data/motif";
 import { Releases } from "#/lib/types/data/releases";
 import { Track } from "#/lib/types/data/track";
 import { activityReleaseFromSlug } from "#/lib/utils/activity";
+import { slugFromPath } from "#/lib/utils/data";
 import { trackReleaseFromPath } from "#/lib/utils/track";
 import { z } from "zod";
 
@@ -50,7 +51,7 @@ export const motifsParsed = Object.entries(motifFiles).map(([k, v]) => {
         );
     }
 
-    return motifParse.data;
+    return { ...motifParse.data, slug: slugFromPath(k) };
 });
 
 export const albumsParsed = Object.entries(albumFiles).map(([k, v]) => {
@@ -61,7 +62,7 @@ export const albumsParsed = Object.entries(albumFiles).map(([k, v]) => {
             `\`${k}\` was not successfully parsed. Please check that the format of the yaml file follows that of the Album schema.`,
         );
     }
-    return albumParse.data;
+    return { ...albumParse.data, slug: slugFromPath(k) };
 });
 
 export const activitiesParsed = Object.entries(activityFiles)
@@ -91,6 +92,7 @@ export const activitiesParsed = Object.entries(activityFiles)
             release: unwrap(
                 activityReleaseFromSlug(activityParse.data.releaseSlug),
             ),
+            slug: slugFromPath(k),
         };
     });
 
@@ -110,6 +112,7 @@ export const tracksParsed = Object.entries(trackFiles)
             // if an activity is explicitly filed in a directory, we should assume that a release should be findable
             // so we actively force unwrap and crash if there's a nonexistent release on a track filed into a directory
             release: unwrap(trackReleaseFromPath(k)),
+            slug: slugFromPath(k),
         };
     })
     .concat(
@@ -132,6 +135,7 @@ export const tracksParsed = Object.entries(trackFiles)
                     name: "Unreleased",
                     year: 0,
                 }),
+                slug: slugFromPath(k),
             };
         }),
     );
