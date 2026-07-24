@@ -75,6 +75,14 @@ export const activitiesParsed = Object.entries(activityFiles)
             );
         }
 
+        const segments = k.split("/");
+        const activityDirectoryType = segments[segments.length - 2];
+        if (activityParse.data.type !== activityDirectoryType) {
+            throw new Error(
+                `\`${k}\` was not successfully parsed. Please check that the you have placed the right activity type into the right folder. E.g. \`raid\`s should go into \`/data/activities/raid/last-wish.yaml\`. `,
+            );
+        }
+
         return {
             ...activityParse.data,
             // we force unwrap here because we want all activities to associate with a release
@@ -99,8 +107,8 @@ export const tracksParsed = Object.entries(trackFiles)
 
         return {
             ...trackParse.data,
-            // if an activity is explicitly filed in a folder, we should assume that a release should be findable
-            // so we actively force unwrap and crash if there's a nonexistent release on a track filed into a folder
+            // if an activity is explicitly filed in a directory, we should assume that a release should be findable
+            // so we actively force unwrap and crash if there's a nonexistent release on a track filed into a directory
             release: unwrap(trackReleaseFromPath(k)),
         };
     })
