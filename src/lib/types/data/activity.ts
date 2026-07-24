@@ -13,6 +13,8 @@ export const Activity = z.object({
         "cinematic",
         "other",
     ]),
+    flavorText: z.string().optional(),
+    description: z.string().optional(),
     releaseSlug: z.string(),
 });
 
