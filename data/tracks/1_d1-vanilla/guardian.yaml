@@ -1,0 +1,19 @@
+title: Guardian
+composers: [Michael Salvatori, Martin O'Donnell, C Paul Johnson]
+description: Title screen theme for Destiny.
+links:
+    - source: youtube
+      url: https://www.youtube.com/watch?v=VN_ee4E-loY
+    - source: spotify
+      url: https://open.spotify.com/track/36tbf42HNxbxqqysIVJ3dE?si=0b152f535cda4277
+    - source: archive
+      url: https://www.youtube.com/watch?v=IOWqj7SXOEA
+      note: This version on the Archive contains additional sounds before the beginning of the track as it is an archive of the full bootflow.
+albums:
+    - album: destiny-ost
+      track: 6
+motifs:
+    - motif: guardian
+      origin: true
+      at: ["0:05-0:12"]
+      note: The definitive opening statement; solo horn over strings.
