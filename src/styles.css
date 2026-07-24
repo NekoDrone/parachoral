@@ -1,4 +1,36 @@
+@import "@fontsource-variable/cormorant-garamond/wght.css";
+@import "@fontsource-variable/inter-tight/wght.css";
+@import "@fontsource-variable/inconsolata/wght.css";
 @import "tailwindcss";
+
+@theme {
+    --color-crust: #060810;
+    --color-base: #0b0e15;
+    --color-surface0: #10141d;
+    --color-surface1: #161b27;
+
+    --color-overlay-0: #1e222c;
+    --color-overlay-1: #2b303c;
+    --color-overlay-2: #454b5a;
+
+    --color-subtext0: #726c60;
+    --color-subtext1: #a59f90;
+    --color-text: #e7e0d0;
+
+    --color-accent: #c7a65b;
+    --color-accent-alt: #d9bc76;
+
+    --color-positive: #74b892;
+    --color-negative: #d5615c;
+
+    --color-haze: #617eb4;
+
+    --font-serif:
+        "Cormorant Garamond Variable", Georgia, "Times New Roman", serif;
+    --font-sans: "Inter Tight Variable", "Inter Tight", system-ui, sans-serif;
+    --font-mono:
+        "Inconsolata Variable", ui-monospace, "SF Mono", Menlo, monospace;
+}
 
 * {
     box-sizing: border-box;
