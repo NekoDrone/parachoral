@@ -49,7 +49,7 @@ export const Track = z.object({
             }),
         )
         .default([]),
-    appearances: z.array(TrackMotifs).default([]),
+    motifs: z.array(TrackMotifs).default([]),
 });
 
 export type Track = z.infer<typeof Track>;
