@@ -2,8 +2,8 @@ title: Journey journey
 release: destiny
 composers: [Martin O'Donnell, Michael Salvatori, Paul McCartney]
 appearances:
-  - motif: traveler-theme
-    at: ['1:05-1:22']
-    note: Inverted, solo cello.
-  - motif: guardian-theme
-    at: ['2:40-3:10']
+    - motif: traveler-theme
+      at: ["1:05-1:22"]
+      note: Inverted, solo cello.
+    - motif: guardian-theme
+      at: ["2:40-3:10"]

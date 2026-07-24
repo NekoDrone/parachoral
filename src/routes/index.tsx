@@ -1,8 +1,8 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
 
-import yestTrack from '../../data/tracks/journey.yaml'
+import yestTrack from "../../data/tracks/journey.yaml";
 
-export const Route = createFileRoute('/')({ component: Home })
+export const Route = createFileRoute("/")({ component: Home });
 
 function Home() {
     return (
@@ -13,5 +13,5 @@ function Home() {
             </p>
             <p>{yestTrack.title}</p>
         </div>
-    )
+    );
 }
