@@ -4,6 +4,7 @@ export const Release = z.object({
     slug: z.string(),
     name: z.string(),
     year: z.number().int(),
+    parentSlug: z.string().optional(),
 });
 
 export type Release = z.infer<typeof Release>;
