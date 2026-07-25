@@ -22,6 +22,7 @@ const BROWSE_BY_NAV_ITEMS: Array<NavItemLink> = [
     { label: "Track", href: "/tracks", type: "link" },
     { label: "Motif", href: "/motifs", type: "link" },
     { label: "Activity", href: "/activities", type: "link" },
+    { label: "Release", href: "/releases", type: "link" },
     { label: "Album", href: "albums", type: "link" },
 ];
 
