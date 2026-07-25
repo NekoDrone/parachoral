@@ -56,15 +56,17 @@ export const Header = () => {
             >
                 {NAV_ITEMS.map((item) =>
                     item.type === "link" ? (
-                        <Link
-                            key={item.label}
-                            to={item.href}
-                            preload="intent"
-                            preloadIntentProximity={30}
-                            className="font-sans text-[11px] font-light uppercase tracking-[0.28em] text-subtext-1 transition-colors duration-200 hover:text-accent"
-                        >
-                            {item.label}
-                        </Link>
+                        <div className="inline-block">
+                            <Link
+                                key={item.label}
+                                to={item.href}
+                                preload="intent"
+                                preloadIntentProximity={30}
+                                className="font-sans text-[11px] font-light uppercase tracking-[0.28em] text-subtext-1 transition-colors duration-200 hover:text-accent"
+                            >
+                                {item.label}
+                            </Link>
+                        </div>
                     ) : (
                         <DropdownModal
                             buttonComponent={
