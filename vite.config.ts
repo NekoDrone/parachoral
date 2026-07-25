@@ -27,6 +27,11 @@ const config = defineConfig({
         nitro({
             preset: "cloudflare-module",
             compatibilityDate: "2026-07-25",
+            // Selecting a Cloudflare preset makes Nitro run the dev server's SSR
+            // inside workerd via miniflare, which breaks on CJS in the module graph
+            // ("module is not defined"). Dev renders under Node instead; the
+            // prerender step of `vite build` still runs against real workerd.
+            devServer: { runner: "self" },
             rollupConfig: { external: [/^@sentry\//] },
         }),
         tailwindcss(),
