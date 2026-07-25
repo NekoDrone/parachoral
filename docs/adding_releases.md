@@ -13,3 +13,5 @@ To add a release, open the releases file located at `/data/releases.yaml`. A rel
 ```
 
 Add the release in chronological order. In the example above, we are listing Season of the Undying, which is in Shadowkeep, the 10th release in Destiny, and the first season tagged under Shadowkeep (hence `10a` as the cardinality).
+
+As always, the above schema is provided as a best-effort example. For the accurate true source of truth for the schema of a Release, please see `/src/lib/types/data/releases.ts.`
