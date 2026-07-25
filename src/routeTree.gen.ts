@@ -10,11 +10,41 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AlbumsRouteImport } from './routes/albums'
+import { Route as MotifsRouteImport } from './routes/motifs'
+import { Route as ReleasesRouteImport } from './routes/releases'
+import { Route as TracksRouteImport } from './routes/tracks'
 import { Route as TrackTrackSlugRouteImport } from './routes/track/$trackSlug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlbumsRoute = AlbumsRouteImport.update({
+  id: '/albums',
+  path: '/albums',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MotifsRoute = MotifsRouteImport.update({
+  id: '/motifs',
+  path: '/motifs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReleasesRoute = ReleasesRouteImport.update({
+  id: '/releases',
+  path: '/releases',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TracksRoute = TracksRouteImport.update({
+  id: '/tracks',
+  path: '/tracks',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TrackTrackSlugRoute = TrackTrackSlugRouteImport.update({
@@ -25,27 +55,69 @@ const TrackTrackSlugRoute = TrackTrackSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/albums': typeof AlbumsRoute
+  '/motifs': typeof MotifsRoute
+  '/releases': typeof ReleasesRoute
+  '/tracks': typeof TracksRoute
   '/track/$trackSlug': typeof TrackTrackSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/albums': typeof AlbumsRoute
+  '/motifs': typeof MotifsRoute
+  '/releases': typeof ReleasesRoute
+  '/tracks': typeof TracksRoute
   '/track/$trackSlug': typeof TrackTrackSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/albums': typeof AlbumsRoute
+  '/motifs': typeof MotifsRoute
+  '/releases': typeof ReleasesRoute
+  '/tracks': typeof TracksRoute
   '/track/$trackSlug': typeof TrackTrackSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/track/$trackSlug'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/albums'
+    | '/motifs'
+    | '/releases'
+    | '/tracks'
+    | '/track/$trackSlug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/track/$trackSlug'
-  id: '__root__' | '/' | '/track/$trackSlug'
+  to:
+    | '/'
+    | '/about'
+    | '/albums'
+    | '/motifs'
+    | '/releases'
+    | '/tracks'
+    | '/track/$trackSlug'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/albums'
+    | '/motifs'
+    | '/releases'
+    | '/tracks'
+    | '/track/$trackSlug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AlbumsRoute: typeof AlbumsRoute
+  MotifsRoute: typeof MotifsRoute
+  ReleasesRoute: typeof ReleasesRoute
+  TracksRoute: typeof TracksRoute
   TrackTrackSlugRoute: typeof TrackTrackSlugRoute
 }
 
@@ -56,6 +128,41 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/albums': {
+      id: '/albums'
+      path: '/albums'
+      fullPath: '/albums'
+      preLoaderRoute: typeof AlbumsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/motifs': {
+      id: '/motifs'
+      path: '/motifs'
+      fullPath: '/motifs'
+      preLoaderRoute: typeof MotifsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/releases': {
+      id: '/releases'
+      path: '/releases'
+      fullPath: '/releases'
+      preLoaderRoute: typeof ReleasesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tracks': {
+      id: '/tracks'
+      path: '/tracks'
+      fullPath: '/tracks'
+      preLoaderRoute: typeof TracksRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/track/$trackSlug': {
@@ -70,6 +177,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AlbumsRoute: AlbumsRoute,
+  MotifsRoute: MotifsRoute,
+  ReleasesRoute: ReleasesRoute,
+  TracksRoute: TracksRoute,
   TrackTrackSlugRoute: TrackTrackSlugRoute,
 }
 export const routeTree = rootRouteImport
