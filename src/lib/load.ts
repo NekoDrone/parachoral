@@ -42,6 +42,13 @@ export const releasesParsed = (() => {
     return releasesParseResult.data.default;
 })();
 
+// map of release slug to release object
+export const releasesMap = (() => {
+    const res = new Map<string, (typeof releasesParsed)[number]>();
+    releasesParsed.forEach((release) => res.set(release.slug, release));
+    return res;
+})();
+
 export const motifsParsed = Object.entries(motifFiles).map(([k, v]) => {
     const motifParse = Motif.safeParse(v);
     if (!motifParse.success) {
@@ -54,6 +61,13 @@ export const motifsParsed = Object.entries(motifFiles).map(([k, v]) => {
     return { ...motifParse.data, slug: slugFromPath(k) };
 });
 
+// map of motif slug to motif object
+export const motifsMap = (() => {
+    const res = new Map<string, (typeof motifsParsed)[number]>();
+    motifsParsed.forEach((motif) => res.set(motif.slug, motif));
+    return res;
+})();
+
 export const albumsParsed = Object.entries(albumFiles).map(([k, v]) => {
     const albumParse = Album.safeParse(v);
     if (!albumParse.success) {
@@ -64,6 +78,13 @@ export const albumsParsed = Object.entries(albumFiles).map(([k, v]) => {
     }
     return { ...albumParse.data, slug: slugFromPath(k) };
 });
+
+// map of album slug to album object
+export const albumsMap = (() => {
+    const res = new Map<string, (typeof albumsParsed)[number]>();
+    albumsParsed.forEach((album) => res.set(album.slug, album));
+    return res;
+})();
 
 export const activitiesParsed = Object.entries(activityFiles)
     .concat(Object.entries(strayActivities))
@@ -95,6 +116,13 @@ export const activitiesParsed = Object.entries(activityFiles)
             slug: slugFromPath(k),
         };
     });
+
+// map of activity slug to activity object
+export const activitiesMap = (() => {
+    const res = new Map<string, (typeof activitiesParsed)[number]>();
+    activitiesParsed.forEach((activity) => res.set(activity.slug, activity));
+    return res;
+})();
 
 // TODO: Actually validate that the track's entries can resolve to the given slugs.
 export const tracksParsed = Object.entries(trackFiles)
@@ -139,3 +167,10 @@ export const tracksParsed = Object.entries(trackFiles)
             };
         }),
     );
+
+// map of track slug to track object
+export const tracksMap = (() => {
+    const res = new Map<string, (typeof tracksParsed)[number]>();
+    tracksParsed.forEach((track) => res.set(track.slug, track));
+    return res;
+})();
