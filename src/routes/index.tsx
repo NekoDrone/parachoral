@@ -1,5 +1,6 @@
 import { Emblem } from "#/components/misc/Emblem";
 import { RuleMark } from "#/components/misc/RuleMark";
+import { Footer } from "#/components/nav/Footer";
 import { Header } from "#/components/nav/Header";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -43,6 +44,8 @@ function Home() {
                     </p>
                 </section>
             </main>
+
+            <Footer />
         </>
     );
 }
