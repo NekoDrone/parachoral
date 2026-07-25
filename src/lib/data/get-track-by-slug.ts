@@ -51,6 +51,8 @@ export const getTrackBySlug = (slug: string): Result<TrackResolved, string> => {
             `Could not find track ${track.title}'s activity(ies), even though slug(s) were provided: \`[${track.playsIn.map((a) => a.activitySlug).join(", ")}]\`. Check to ensure that you have correctly linked a track's activity(ies) to an existing activity in \`/data/activities/*.yaml\``,
         );
 
+    // I am skill issuing hard here, I can't figure out how to narrow the type properly
+    // so I'm just gonna guard and cast.
     return ok({
         ...track,
         release: trackRelease,
