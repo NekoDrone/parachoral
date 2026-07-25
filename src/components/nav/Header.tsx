@@ -1,6 +1,44 @@
-const NAV_ITEMS = ["Tracks", "Motifs", "Activities", "Albums", "About"];
+import { DropdownModal } from "#/components/dropdown/DropdownModal";
+import { Link } from "@tanstack/react-router";
 
-export const SiteHeader = () => {
+interface NavItemBase {
+    label: string;
+    type: "link" | "dropdown";
+}
+
+interface NavItemLink extends NavItemBase {
+    type: "link";
+    href: string;
+}
+
+interface NavItemDropdown extends NavItemBase {
+    type: "dropdown";
+    dropdownItems: Array<NavItemLink>;
+}
+
+type NavItem = NavItemLink | NavItemDropdown;
+
+const BROWSE_BY_NAV_ITEMS: Array<NavItemLink> = [
+    { label: "Tracks", href: "/tracks", type: "link" },
+    { label: "Motifs", href: "/motifs", type: "link" },
+    { label: "Activities", href: "/activities", type: "link" },
+    { label: "Albums", href: "albums", type: "link" },
+];
+
+const NAV_ITEMS: Array<NavItem> = [
+    {
+        label: "Browse By",
+        type: "dropdown",
+        dropdownItems: BROWSE_BY_NAV_ITEMS,
+    },
+    {
+        label: "About",
+        href: "/about",
+        type: "link",
+    },
+];
+
+export const Header = () => {
     return (
         <header className="flex max-w-full items-center gap-9 border-b border-overlay-1 px-7 py-5">
             <a
@@ -12,16 +50,42 @@ export const SiteHeader = () => {
             </a>
 
             {/* Swap <a> for the router's typed <Link> as each route lands */}
-            <nav aria-label="Primary" className="ml-auto hidden gap-6 md:flex">
-                {NAV_ITEMS.map((item) => (
-                    <a
-                        key={item}
-                        href="#"
-                        className="font-sans text-[11px] font-light uppercase tracking-[0.28em] text-subtext-1 transition-colors duration-200 hover:text-accent"
-                    >
-                        {item}
-                    </a>
-                ))}
+            <nav
+                aria-label="Primary"
+                className="ml-auto gap-6 md:flex flex items-center"
+            >
+                {NAV_ITEMS.map((item) =>
+                    item.type === "link" ? (
+                        <Link
+                            key={item.label}
+                            to={item.href}
+                            preload="intent"
+                            preloadIntentProximity={30}
+                            className="font-sans text-[11px] font-light uppercase tracking-[0.28em] text-subtext-1 transition-colors duration-200 hover:text-accent"
+                        >
+                            {item.label}
+                        </Link>
+                    ) : (
+                        <DropdownModal
+                            buttonComponent={
+                                <div className="font-sans text-[11px] font-light uppercase tracking-[0.28em] text-subtext-1 transition-colors duration-200 hover:text-accent">
+                                    {item.label}
+                                </div>
+                            }
+                            className="flex flex-col gap-3 bg-surface0 border-overlay-1 border p-3 mt-2 ml-1"
+                        >
+                            {item.dropdownItems.map((dropdownItem) => (
+                                <a
+                                    key={dropdownItem.label}
+                                    href={dropdownItem.href}
+                                    className="font-sans text-[11px] font-light uppercase tracking-[0.28em] text-subtext-1 transition-colors duration-200 hover:text-accent"
+                                >
+                                    {dropdownItem.label}
+                                </a>
+                            ))}
+                        </DropdownModal>
+                    ),
+                )}
             </nav>
 
             <label className="hidden items-center gap-2.5 border border-overlay-1 px-3 py-2 transition-colors duration-200 focus-within:border-accent/40 md:flex">

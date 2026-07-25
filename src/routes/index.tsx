@@ -1,6 +1,6 @@
 import { Emblem } from "#/components/misc/Emblem";
 import { RuleMark } from "#/components/misc/RuleMark";
-import { SiteHeader } from "#/components/nav/Header";
+import { Header } from "#/components/nav/Header";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({ component: Home });
@@ -14,7 +14,7 @@ function Home() {
                 className="pointer-events-none fixed inset-0 bg-[radial-gradient(900px_480px_at_50%_-8%,rgba(97,126,180,0.13),transparent_65%)]"
             />
 
-            <SiteHeader />
+            <Header />
 
             <main className="relative max-w-full px-7">
                 <section className="pb-24 pt-16 text-center">
@@ -34,8 +34,9 @@ function Home() {
                         game ever made, Destiny. Every track is painstakingly
                         tagged, noted, and catalogued with all of its
                         marginalia. Each motif and idea found and brought into
-                        the light from the dark. An archive of over a decade's worth of
-                        joy, grief, sorrow, anger, fear, knowledge, and hope.
+                        the light from the dark. An archive of over a decade's
+                        worth of joy, grief, sorrow, anger, fear, knowledge, and
+                        hope.
                     </p>
                     <p className="mt-5 text-[17px] uppercase tracking-widest indent-[0.42em] text-gold">
                         Per Audacia ad Astra.
