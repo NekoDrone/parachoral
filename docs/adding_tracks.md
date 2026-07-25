@@ -18,4 +18,4 @@ Once done, you may launch the dev server (`pnpm dev`), which will attempt to loa
 
 [^1]: Music of the Spheres, or MotS for short, falls under release 0 (`0_music-of-the-spheres`) as it is a prequel release to Destiny. This is in spite of the actual release of MotS being in 2018.
 
-[^2]: While The Taken King's soundtrack is the second release, we track releases in Parachoral as in-game releases. So, since The Taken King was the third expansion in Destiny, it is chronologically the fourth release (Destiny 1 is the first release; 1 + 3 = 4).
+[^2]: While The Taken King's soundtrack is the second album, we track releases in Parachoral as in-game releases. So, since The Taken King was the third expansion in Destiny, it is chronologically the fourth release (Destiny 1 is the first release; 1 + 3 = 4).
