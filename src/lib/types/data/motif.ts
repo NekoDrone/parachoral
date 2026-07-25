@@ -5,7 +5,7 @@ export const Motif = z.object({
     aka: z.array(z.string()).default([]),
     description: z.string(),
     related: z
-        .array(z.object({ motif: z.string(), relation: z.string() }))
+        .array(z.object({ motifSlug: z.string(), relation: z.string() }))
         .default([]),
 });
 
