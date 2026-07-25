@@ -10,6 +10,7 @@
         "generate-routes": "tsr generate",
         "build": "vite build",
         "preview": "vite preview",
+        "deploy": "vite build && wrangler deploy",
         "test": "vitest run",
         "lint": "eslint",
         "format": "prettier --write . && eslint --fix",
@@ -55,12 +56,7 @@
         "prettier": "^3.8.1",
         "typescript": "^6.0.2",
         "vite": "^8.0.0",
-        "vitest": "^4.1.5"
-    },
-    "pnpm": {
-        "onlyBuiltDependencies": [
-            "esbuild",
-            "lightningcss"
-        ]
+        "vitest": "^4.1.5",
+        "wrangler": "^4.114.0"
     }
 }
