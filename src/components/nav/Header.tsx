@@ -19,10 +19,10 @@ interface NavItemDropdown extends NavItemBase {
 type NavItem = NavItemLink | NavItemDropdown;
 
 const BROWSE_BY_NAV_ITEMS: Array<NavItemLink> = [
-    { label: "Tracks", href: "/tracks", type: "link" },
-    { label: "Motifs", href: "/motifs", type: "link" },
-    { label: "Activities", href: "/activities", type: "link" },
-    { label: "Albums", href: "albums", type: "link" },
+    { label: "Track", href: "/tracks", type: "link" },
+    { label: "Motif", href: "/motifs", type: "link" },
+    { label: "Activity", href: "/activities", type: "link" },
+    { label: "Album", href: "albums", type: "link" },
 ];
 
 const NAV_ITEMS: Array<NavItem> = [
