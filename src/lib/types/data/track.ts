@@ -1,4 +1,7 @@
 import { Sources } from "#/lib/types/data";
+import { Activity } from "#/lib/types/data/activity";
+import { Album } from "#/lib/types/data/album";
+import { Motif } from "#/lib/types/data/motif";
 import { z } from "zod";
 
 export const TrackTimestamp = z
@@ -18,7 +21,7 @@ export const TrackTimestamp = z
 
 export type TrackTimestamp = z.infer<typeof TrackTimestamp>;
 
-export const TrackMotifs = z.object({
+export const TrackMotif = z.object({
     motifSlug: z.string(), // slug → resolved against motif index
     origin: z.boolean().default(false), // ≤1 per motif across ALL tracks
     at: z.array(TrackTimestamp).min(1),
@@ -26,7 +29,7 @@ export const TrackMotifs = z.object({
     clip: z.string().optional(),
 });
 
-export type TrackMotifs = z.infer<typeof TrackMotifs>;
+export type TrackMotif = z.infer<typeof TrackMotif>;
 
 export const Track = z.object({
     title: z.string(),
@@ -49,7 +52,62 @@ export const Track = z.object({
             }),
         )
         .default([]),
-    motifs: z.array(TrackMotifs).default([]),
+    motifs: z.array(TrackMotif).default([]),
 });
 
 export type Track = z.infer<typeof Track>;
+
+export const TrackAlbumResolved = z.object({
+    album: Album,
+    track: z.number().int().positive(),
+    note: z.string().optional(),
+});
+
+export type TrackAlbumResolved = z.infer<typeof TrackAlbumResolved>;
+
+export const hasAlbum = (entry: {
+    album: Album | undefined;
+    track: number;
+}): entry is TrackAlbumResolved => {
+    return entry.album !== undefined;
+};
+
+export const TrackActivityResolved = z.object({
+    activity: Activity,
+    note: z.string().optional(),
+});
+
+export type TrackActivityResolved = z.infer<typeof TrackActivityResolved>;
+
+export const hasActivity = (entry: {
+    activity: Activity | undefined;
+}): entry is TrackActivityResolved => {
+    return entry.activity !== undefined;
+};
+
+export const TrackMotifResolved = z.object({
+    motif: Motif,
+    origin: z.boolean().default(false), // ≤1 per motif across ALL tracks
+    at: z.array(TrackTimestamp).min(1),
+    note: z.string().optional(),
+    clip: z.string().optional(),
+});
+
+export type TrackMotifResolved = z.infer<typeof TrackMotifResolved>;
+
+export const hasMotif = (entry: {
+    motif: Motif | undefined;
+    origin: boolean;
+    at: Array<TrackTimestamp>;
+}): entry is TrackMotifResolved => {
+    return entry.motif !== undefined;
+};
+
+export const TrackResolved = z.object({
+    ...Track.shape,
+    albums: z.array(TrackAlbumResolved).default([]),
+    playsIn: z.array(TrackActivityResolved).default([]),
+    motifs: z.array(TrackMotifResolved),
+});
+
+export type TrackResolved = z.infer<typeof TrackResolved>;
