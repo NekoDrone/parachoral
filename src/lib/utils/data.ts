@@ -6,5 +6,5 @@
 export const slugFromPath = (path: string): string => {
     const arr = path.split("/");
     const res = arr[arr.length - 1];
-    return res;
+    return res.replace(/\.ya?ml$/, "");
 };
