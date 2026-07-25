@@ -16,6 +16,7 @@ export const Activity = z.object({
     flavorText: z.string().optional(),
     description: z.string().optional(),
     releaseSlug: z.string(),
+    parentActivitySlug: z.string().optional(),
 });
 
 export type Activity = z.infer<typeof Activity>;
