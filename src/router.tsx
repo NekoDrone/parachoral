@@ -7,6 +7,14 @@ export function getRouter() {
         scrollRestoration: true,
         defaultPreload: "intent",
         defaultPreloadStaleTime: 0,
+        defaultViewTransition: {
+            types: ({ fromLocation, toLocation }) => {
+                if (!fromLocation) return ["slide-none"];
+                const from = fromLocation.state.__TSR_index;
+                const to = toLocation.state.__TSR_index;
+                return [from > to ? "slide-right" : "slide-left"];
+            },
+        },
     });
 
     return router;

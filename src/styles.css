@@ -62,6 +62,20 @@
     }
 }
 
+/* view transitions */
+@keyframes slide-in-right { from { transform: translateX(100%); } }
+@keyframes slide-out-left { to { transform: translateX(-30%); opacity: 0; } }
+
+html:active-view-transition-type(slide-left) {
+  &::view-transition-old(root) { animation: 220ms ease both slide-out-left; }
+  &::view-transition-new(root) { animation: 220ms ease both slide-in-right; }
+}
+html:active-view-transition-type(slide-right) {
+  &::view-transition-old(root) { animation: 220ms ease both slide-out-right; }
+  &::view-transition-new(root) { animation: 220ms ease both slide-in-left; }
+}
+
+
 * {
     box-sizing: border-box;
 }
