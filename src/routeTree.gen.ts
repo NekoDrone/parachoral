@@ -9,17 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as LayoutRouteImport } from './routes/_layout'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AlbumsRouteImport } from './routes/albums'
 import { Route as MotifsRouteImport } from './routes/motifs'
 import { Route as ReleasesRouteImport } from './routes/releases'
-import { Route as TracksRouteImport } from './routes/tracks'
+import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
+import { Route as LayoutTracksRouteImport } from './routes/_layout/tracks'
 import { Route as TrackTrackSlugRouteImport } from './routes/track/$trackSlug'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const LayoutRoute = LayoutRouteImport.update({
+  id: '/_layout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -42,10 +42,15 @@ const ReleasesRoute = ReleasesRouteImport.update({
   path: '/releases',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TracksRoute = TracksRouteImport.update({
+const LayoutIndexRoute = LayoutIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutTracksRoute = LayoutTracksRouteImport.update({
   id: '/tracks',
   path: '/tracks',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => LayoutRoute,
 } as any)
 const TrackTrackSlugRoute = TrackTrackSlugRouteImport.update({
   id: '/track/$trackSlug',
@@ -54,32 +59,33 @@ const TrackTrackSlugRoute = TrackTrackSlugRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof LayoutIndexRoute
   '/about': typeof AboutRoute
   '/albums': typeof AlbumsRoute
   '/motifs': typeof MotifsRoute
   '/releases': typeof ReleasesRoute
-  '/tracks': typeof TracksRoute
+  '/tracks': typeof LayoutTracksRoute
   '/track/$trackSlug': typeof TrackTrackSlugRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/albums': typeof AlbumsRoute
   '/motifs': typeof MotifsRoute
   '/releases': typeof ReleasesRoute
-  '/tracks': typeof TracksRoute
+  '/tracks': typeof LayoutTracksRoute
   '/track/$trackSlug': typeof TrackTrackSlugRoute
+  '/': typeof LayoutIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_layout': typeof LayoutRouteWithChildren
   '/about': typeof AboutRoute
   '/albums': typeof AlbumsRoute
   '/motifs': typeof MotifsRoute
   '/releases': typeof ReleasesRoute
-  '/tracks': typeof TracksRoute
+  '/_layout/tracks': typeof LayoutTracksRoute
   '/track/$trackSlug': typeof TrackTrackSlugRoute
+  '/_layout/': typeof LayoutIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -93,41 +99,41 @@ export interface FileRouteTypes {
     | '/track/$trackSlug'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/about'
     | '/albums'
     | '/motifs'
     | '/releases'
     | '/tracks'
     | '/track/$trackSlug'
+    | '/'
   id:
     | '__root__'
-    | '/'
+    | '/_layout'
     | '/about'
     | '/albums'
     | '/motifs'
     | '/releases'
-    | '/tracks'
+    | '/_layout/tracks'
     | '/track/$trackSlug'
+    | '/_layout/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  LayoutRoute: typeof LayoutRouteWithChildren
   AboutRoute: typeof AboutRoute
   AlbumsRoute: typeof AlbumsRoute
   MotifsRoute: typeof MotifsRoute
   ReleasesRoute: typeof ReleasesRoute
-  TracksRoute: typeof TracksRoute
   TrackTrackSlugRoute: typeof TrackTrackSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
+    '/_layout': {
+      id: '/_layout'
+      path: ''
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof LayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -158,12 +164,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReleasesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/tracks': {
-      id: '/tracks'
+    '/_layout/': {
+      id: '/_layout/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof LayoutIndexRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/tracks': {
+      id: '/_layout/tracks'
       path: '/tracks'
       fullPath: '/tracks'
-      preLoaderRoute: typeof TracksRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof LayoutTracksRouteImport
+      parentRoute: typeof LayoutRoute
     }
     '/track/$trackSlug': {
       id: '/track/$trackSlug'
@@ -175,13 +188,25 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface LayoutRouteChildren {
+  LayoutTracksRoute: typeof LayoutTracksRoute
+  LayoutIndexRoute: typeof LayoutIndexRoute
+}
+
+const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutTracksRoute: LayoutTracksRoute,
+  LayoutIndexRoute: LayoutIndexRoute,
+}
+
+const LayoutRouteWithChildren =
+  LayoutRoute._addFileChildren(LayoutRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  LayoutRoute: LayoutRouteWithChildren,
   AboutRoute: AboutRoute,
   AlbumsRoute: AlbumsRoute,
   MotifsRoute: MotifsRoute,
   ReleasesRoute: ReleasesRoute,
-  TracksRoute: TracksRoute,
   TrackTrackSlugRoute: TrackTrackSlugRoute,
 }
 export const routeTree = rootRouteImport
