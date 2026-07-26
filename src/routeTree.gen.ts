@@ -10,11 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LayoutRouteImport } from './routes/_layout'
-import { Route as AboutRouteImport } from './routes/about'
-import { Route as AlbumsRouteImport } from './routes/albums'
-import { Route as MotifsRouteImport } from './routes/motifs'
-import { Route as ReleasesRouteImport } from './routes/releases'
 import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
+import { Route as LayoutAboutRouteImport } from './routes/_layout/about'
+import { Route as LayoutActivitiesRouteImport } from './routes/_layout/activities'
+import { Route as LayoutAlbumsRouteImport } from './routes/_layout/albums'
+import { Route as LayoutMotifsRouteImport } from './routes/_layout/motifs'
+import { Route as LayoutReleasesRouteImport } from './routes/_layout/releases'
 import { Route as LayoutTracksRouteImport } from './routes/_layout/tracks'
 import { Route as TrackTrackSlugRouteImport } from './routes/track/$trackSlug'
 
@@ -22,29 +23,34 @@ const LayoutRoute = LayoutRouteImport.update({
   id: '/_layout',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AlbumsRoute = AlbumsRouteImport.update({
-  id: '/albums',
-  path: '/albums',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MotifsRoute = MotifsRouteImport.update({
-  id: '/motifs',
-  path: '/motifs',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ReleasesRoute = ReleasesRouteImport.update({
-  id: '/releases',
-  path: '/releases',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LayoutIndexRoute = LayoutIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutAboutRoute = LayoutAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutActivitiesRoute = LayoutActivitiesRouteImport.update({
+  id: '/activities',
+  path: '/activities',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutAlbumsRoute = LayoutAlbumsRouteImport.update({
+  id: '/albums',
+  path: '/albums',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutMotifsRoute = LayoutMotifsRouteImport.update({
+  id: '/motifs',
+  path: '/motifs',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutReleasesRoute = LayoutReleasesRouteImport.update({
+  id: '/releases',
+  path: '/releases',
   getParentRoute: () => LayoutRoute,
 } as any)
 const LayoutTracksRoute = LayoutTracksRouteImport.update({
@@ -60,18 +66,20 @@ const TrackTrackSlugRoute = TrackTrackSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof LayoutIndexRoute
-  '/about': typeof AboutRoute
-  '/albums': typeof AlbumsRoute
-  '/motifs': typeof MotifsRoute
-  '/releases': typeof ReleasesRoute
+  '/about': typeof LayoutAboutRoute
+  '/activities': typeof LayoutActivitiesRoute
+  '/albums': typeof LayoutAlbumsRoute
+  '/motifs': typeof LayoutMotifsRoute
+  '/releases': typeof LayoutReleasesRoute
   '/tracks': typeof LayoutTracksRoute
   '/track/$trackSlug': typeof TrackTrackSlugRoute
 }
 export interface FileRoutesByTo {
-  '/about': typeof AboutRoute
-  '/albums': typeof AlbumsRoute
-  '/motifs': typeof MotifsRoute
-  '/releases': typeof ReleasesRoute
+  '/about': typeof LayoutAboutRoute
+  '/activities': typeof LayoutActivitiesRoute
+  '/albums': typeof LayoutAlbumsRoute
+  '/motifs': typeof LayoutMotifsRoute
+  '/releases': typeof LayoutReleasesRoute
   '/tracks': typeof LayoutTracksRoute
   '/track/$trackSlug': typeof TrackTrackSlugRoute
   '/': typeof LayoutIndexRoute
@@ -79,10 +87,11 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_layout': typeof LayoutRouteWithChildren
-  '/about': typeof AboutRoute
-  '/albums': typeof AlbumsRoute
-  '/motifs': typeof MotifsRoute
-  '/releases': typeof ReleasesRoute
+  '/_layout/about': typeof LayoutAboutRoute
+  '/_layout/activities': typeof LayoutActivitiesRoute
+  '/_layout/albums': typeof LayoutAlbumsRoute
+  '/_layout/motifs': typeof LayoutMotifsRoute
+  '/_layout/releases': typeof LayoutReleasesRoute
   '/_layout/tracks': typeof LayoutTracksRoute
   '/track/$trackSlug': typeof TrackTrackSlugRoute
   '/_layout/': typeof LayoutIndexRoute
@@ -92,6 +101,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/activities'
     | '/albums'
     | '/motifs'
     | '/releases'
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/about'
+    | '/activities'
     | '/albums'
     | '/motifs'
     | '/releases'
@@ -109,10 +120,11 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_layout'
-    | '/about'
-    | '/albums'
-    | '/motifs'
-    | '/releases'
+    | '/_layout/about'
+    | '/_layout/activities'
+    | '/_layout/albums'
+    | '/_layout/motifs'
+    | '/_layout/releases'
     | '/_layout/tracks'
     | '/track/$trackSlug'
     | '/_layout/'
@@ -120,10 +132,6 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   LayoutRoute: typeof LayoutRouteWithChildren
-  AboutRoute: typeof AboutRoute
-  AlbumsRoute: typeof AlbumsRoute
-  MotifsRoute: typeof MotifsRoute
-  ReleasesRoute: typeof ReleasesRoute
   TrackTrackSlugRoute: typeof TrackTrackSlugRoute
 }
 
@@ -136,39 +144,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/albums': {
-      id: '/albums'
-      path: '/albums'
-      fullPath: '/albums'
-      preLoaderRoute: typeof AlbumsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/motifs': {
-      id: '/motifs'
-      path: '/motifs'
-      fullPath: '/motifs'
-      preLoaderRoute: typeof MotifsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/releases': {
-      id: '/releases'
-      path: '/releases'
-      fullPath: '/releases'
-      preLoaderRoute: typeof ReleasesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_layout/': {
       id: '/_layout/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof LayoutIndexRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/about': {
+      id: '/_layout/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof LayoutAboutRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/activities': {
+      id: '/_layout/activities'
+      path: '/activities'
+      fullPath: '/activities'
+      preLoaderRoute: typeof LayoutActivitiesRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/albums': {
+      id: '/_layout/albums'
+      path: '/albums'
+      fullPath: '/albums'
+      preLoaderRoute: typeof LayoutAlbumsRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/motifs': {
+      id: '/_layout/motifs'
+      path: '/motifs'
+      fullPath: '/motifs'
+      preLoaderRoute: typeof LayoutMotifsRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/releases': {
+      id: '/_layout/releases'
+      path: '/releases'
+      fullPath: '/releases'
+      preLoaderRoute: typeof LayoutReleasesRouteImport
       parentRoute: typeof LayoutRoute
     }
     '/_layout/tracks': {
@@ -189,11 +204,21 @@ declare module '@tanstack/react-router' {
 }
 
 interface LayoutRouteChildren {
+  LayoutAboutRoute: typeof LayoutAboutRoute
+  LayoutActivitiesRoute: typeof LayoutActivitiesRoute
+  LayoutAlbumsRoute: typeof LayoutAlbumsRoute
+  LayoutMotifsRoute: typeof LayoutMotifsRoute
+  LayoutReleasesRoute: typeof LayoutReleasesRoute
   LayoutTracksRoute: typeof LayoutTracksRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutAboutRoute: LayoutAboutRoute,
+  LayoutActivitiesRoute: LayoutActivitiesRoute,
+  LayoutAlbumsRoute: LayoutAlbumsRoute,
+  LayoutMotifsRoute: LayoutMotifsRoute,
+  LayoutReleasesRoute: LayoutReleasesRoute,
   LayoutTracksRoute: LayoutTracksRoute,
   LayoutIndexRoute: LayoutIndexRoute,
 }
@@ -203,10 +228,6 @@ const LayoutRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   LayoutRoute: LayoutRouteWithChildren,
-  AboutRoute: AboutRoute,
-  AlbumsRoute: AlbumsRoute,
-  MotifsRoute: MotifsRoute,
-  ReleasesRoute: ReleasesRoute,
   TrackTrackSlugRoute: TrackTrackSlugRoute,
 }
 export const routeTree = rootRouteImport
