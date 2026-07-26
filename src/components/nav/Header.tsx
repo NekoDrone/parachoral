@@ -42,13 +42,13 @@ const NAV_ITEMS: Array<NavItem> = [
 export const Header = () => {
     return (
         <header className="flex max-w-full items-center gap-9 border-b border-overlay-1 px-7 py-5">
-            <a
-                href="/"
+            <Link
+                to="/"
                 className="font-sans text-[13px] tracking-[0.34em] text-text"
             >
                 PARACHORAL
                 <span className="tracking-[0.2em] text-accent">.FM</span>
-            </a>
+            </Link>
 
             {/* Swap <a> for the router's typed <Link> as each route lands */}
             <nav
@@ -78,13 +78,13 @@ export const Header = () => {
                             key={item.label}
                         >
                             {item.dropdownItems.map((dropdownItem) => (
-                                <a
-                                    key={dropdownItem.label}
+                                <Link
+                                    to={dropdownItem.label}
                                     href={dropdownItem.href}
                                     className="font-sans text-[11px] font-light uppercase tracking-[0.28em] text-subtext-1 transition-colors duration-200 hover:text-accent"
                                 >
                                     {dropdownItem.label}
-                                </a>
+                                </Link>
                             ))}
                         </DropdownModal>
                     ),
