@@ -1,3 +1,4 @@
+import { CountUp } from "#/components/animated/CountUp";
 import { DropdownModal } from "#/components/dropdown/DropdownModal";
 import { Diamond } from "#/components/misc/Diamond";
 import { PageWrapper } from "#/components/page/PageWrapper";
@@ -22,8 +23,15 @@ function RouteComponent() {
                     Tracks
                 </h1>
                 <p className="text-[18px] text-subtext-1  max-w-xl">
-                    There are {tracksParsed.length} tracks across Destiny's
-                    history. Here's every one of them.
+                    There are{" "}
+                    <CountUp
+                        to={tracksParsed.length}
+                        className="text-accent-alt underline"
+                        duration={1}
+                        startOnView={false}
+                    />{" "}
+                    tracks across Destiny's history. Each of them bringing to
+                    life the way every Guardian feels. Here's every one of them.
                 </p>
                 <Toolbar />
             </section>
