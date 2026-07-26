@@ -93,12 +93,12 @@ export const Emblem = () => {
                     cx={400}
                     cy={110}
                     r={5.5}
-                    className="fill-gold drop-shadow-[0_0_7px_rgba(199,166,91,0.75)]"
+                    className="fill-accent drop-shadow-[0_0_7px_rgba(199,166,91,0.75)]"
                 />
             </svg>
 
-            <div className="absolute inset-y-0 left-0 w-32 bg-linear-to-r from-ink to-transparent" />
-            <div className="absolute inset-y-0 right-0 w-32 bg-linear-to-l from-ink to-transparent" />
+            <div className="absolute inset-y-0 left-0 w-32 bg-linear-to-r from-base to-transparent" />
+            <div className="absolute inset-y-0 right-0 w-32 bg-linear-to-l from-base to-transparent" />
         </div>
     );
 };
