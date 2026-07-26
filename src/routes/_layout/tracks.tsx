@@ -70,7 +70,10 @@ const Toolbar = () => {
             </button>
             <DropdownModal
                 buttonComponent={
-                    <div role="button" className="appearance-none bg-transparent border border-text/13 text-text/70 font-sans font-normal text-[11px] tracking-[0.24em] uppercase px-[18px] py-[12px] inline-flex items-center gap-[10px] transition-colors duration-200 ease-[ease] hover:border-accent/40 hover:text-text">
+                    <div
+                        role="button"
+                        className="appearance-none bg-transparent border border-text/13 text-text/70 font-sans font-normal text-[11px] tracking-[0.24em] uppercase px-[18px] py-[12px] inline-flex items-center gap-[10px] transition-colors duration-200 ease-[ease] hover:border-accent/40 hover:text-text"
+                    >
                         Sorted by {sortStrategy} <CaretDownIcon />
                     </div>
                 }
@@ -93,6 +96,23 @@ const Toolbar = () => {
                     </div>
                 ))}
             </DropdownModal>
+            <button
+                className={
+                    "transition-colors " +
+                    (query !== "" ||
+                        originsOnly ||
+                        sortStrategy !== SortStrategy.RELEASE
+                        ? "text-subtext-1  hover:text-accent"
+                        : "text-subtext-0")
+                }
+                onClick={() => {
+                    setQuery("");
+                    setOriginsOnly(false);
+                    setSortStrategy(SortStrategy.RELEASE);
+                }}
+            >
+                reset
+            </button>
         </div>
     );
 };
