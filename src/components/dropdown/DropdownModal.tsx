@@ -35,7 +35,6 @@ export const DropdownModal = ({
     return (
         <div ref={dropdownRef} className="relative inline-block">
             <button
-                className="cursor-pointer"
                 onClick={() => setShowDropdown((prev) => !prev)}
             >
                 {buttonComponent}
