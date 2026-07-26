@@ -1,13 +1,30 @@
-export const Dia = ({ filled = true, size = 7 }) => {
+import { motion } from "motion/react";
+
+export const Diamond = ({
+    filled = true,
+    size = 7,
+}: {
+    filled?: boolean;
+    size?: number;
+}) => {
     return (
         <span
             aria-hidden="true"
-            className={
-                "inline-block rotate-45 align-middle" + filled
-                    ? "bg-accent"
-                    : "border border-accent bg-transparent"
-            }
-            style={{ width: size, height: size }}
-        />
+            className="relative inline-block align-middle border border-solid border-accent rounded-[1px]"
+            style={{ width: size, height: size, rotate: "45deg" }}
+        >
+            <motion.span
+                className="absolute inset-0 bg-accent rounded-[0.5px]"
+                initial={false}
+                animate={{ scale: filled ? 1 : 0, opacity: filled ? 1 : 0 }}
+                transition={{
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20,
+                    mass: 0.5,
+                    duration: 0.1,
+                }}
+            />
+        </span>
     );
 };
