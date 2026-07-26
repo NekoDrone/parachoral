@@ -18,7 +18,7 @@ import {
     Plus,
     PlusIcon,
 } from "@phosphor-icons/react";
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { AnimatePresence, motion, secondsToMilliseconds } from "motion/react";
 import { useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
@@ -248,7 +248,7 @@ const TrackSection = ({
     originsOnly,
 }: {
     release: Release;
-    tracks: Array<Track>;
+    tracks: Array<(typeof tracksParsed)[number]>;
     originsOnly: boolean;
 }) => {
     const releaseCardinality = Number.parseInt(release.slug.split("_")[0]);
@@ -282,7 +282,7 @@ const TrackSection = ({
     );
 };
 
-const TrackRow = ({ track }: { track: Track }) => {
+const TrackRow = ({ track }: { track: (typeof tracksParsed)[number] }) => {
     const [open, setOpen] = useState(false);
 
     const hasOrigin = track.motifs.some((m) => m.origin);
@@ -291,14 +291,13 @@ const TrackRow = ({ track }: { track: Track }) => {
         getActivityBySlug(track.playsIn[0].activitySlug);
     const trackTotalNumber =
         tracksParsed.findIndex(
-            (t) =>
-                t.title === track.title && t.description === track.description,
+            (t) => t.slug === track.slug && t.release === track.release,
         ) + 1;
 
     return (
         <li
             className={
-                "border-b border-text/13 pl-2 group" +
+                "group" +
                 (hasOrigin
                     ? " bg-linear-to-r from-accent/5.5 to-transparent to-55%"
                     : "") +
@@ -306,7 +305,7 @@ const TrackRow = ({ track }: { track: Track }) => {
             }
         >
             <button
-                className="flex w-full justify-between items-center appearance-none bg-transparent border-0 text-left text-text pl-[4px] pr-[10px] py-[13px] transition-colors duration-180 ease-[ease] hover:bg-text/3"
+                className="flex w-full justify-between items-center appearance-none bg-transparent border-0 text-left text-text pl-3 pr-[10px] py-[13px] transition-colors duration-180 ease-[ease] hover:bg-text/3 "
                 onClick={() => {
                     setOpen(!open);
                 }}
@@ -316,9 +315,15 @@ const TrackRow = ({ track }: { track: Track }) => {
                         PCH-{String(trackTotalNumber).padStart(3, "0")}
                     </span>
                     <span className="font-serif text-[20px] leading-tight transition-colors w-64">
-                        {track.title}
+                        <Link
+                            // @ts-expect-error i cannot be bothered to fix this
+                            to={`/track/${track.slug}`}
+                            className=" hover:text-accent transition-colors"
+                        >
+                            {track.title}
+                        </Link>
                     </span>
-                    <span className="text-[11.5px] tracking-[0.08em] overflow-hidden text-ellipsis whitespace-nowrap font-mono text-subtext-1 w-52">
+                    <span className="text-[11.5px] tracking-[0.08em] overflow-hidden text-ellipsis whitespace-nowrap font-mono text-subtext-0 w-52">
                         {track.composers
                             .map((c) => c.split(" ")[c.split(" ").length - 1])
                             .join(" · ")}
@@ -398,13 +403,17 @@ const TrackRow = ({ track }: { track: Track }) => {
                                                             />
                                                         </span>
                                                         {motifResolved.ok && (
-                                                            <span className="font-serif text-[18px]">
+                                                            <Link
+                                                                // @ts-expect-error same shit.
+                                                                to={`/motif/${m.motifSlug}`}
+                                                                className="font-serif text-[18px] hover:text-accent transition-colors"
+                                                            >
                                                                 {
                                                                     motifResolved
                                                                         .value
                                                                         .name
                                                                 }
-                                                            </span>
+                                                            </Link>
                                                         )}
                                                     </div>
                                                     <span className="text-[9.5px] tracking-[0.26em] uppercase font-mono text-subtext-1 pb-1">
@@ -444,19 +453,19 @@ const TrackRow = ({ track }: { track: Track }) => {
 
                         {track.links && (
                             <p className="text-[11px] tracking-widest mt-4 font-mono flex gap-2">
-                                <span className="text-subtext-1">
-                                    Listen —
-                                </span>
+                                <span className="text-subtext-1">Listen —</span>
                                 {track.links.map((l, i) => (
                                     <>
                                         <a
                                             key={l.source}
                                             href={l.url}
                                             className="text-accent hover:text-text transition-colors flex"
+                                            target="_blank"
+                                            rel="noreferrer"
                                         >
                                             {l.source}{" "}
                                             <span>
-                                                <ArrowUpRightIcon size={8}/>
+                                                <ArrowUpRightIcon size={8} />
                                             </span>
                                         </a>
                                         {track.links &&
