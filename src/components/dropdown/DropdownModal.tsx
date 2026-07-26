@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useRef, useState } from "react";
-import type { ReactNode } from "react";
+import type { Dispatch, ReactNode, RefObject, SetStateAction } from "react";
 import { useModalMousedownEffect } from "#/lib/hooks/useModalMousedownEffect";
 import { useModalEscapeEffect } from "#/lib/hooks/useModalEscapeEffect";
 
@@ -8,14 +8,23 @@ export const DropdownModal = ({
     buttonComponent,
     children,
     className,
+    ref,
+    showDropdownState,
+    setShowDropdownState,
 }: {
     buttonComponent: ReactNode;
     children: ReactNode;
     className?: string;
+    ref?: RefObject<HTMLDivElement>;
+    showDropdownState?: boolean;
+    setShowDropdownState?: Dispatch<SetStateAction<boolean>>;
 }) => {
-    const [showDropdown, setShowDropdown] = useState(false);
+    const [showDropdown, setShowDropdown] =
+        showDropdownState !== undefined && setShowDropdownState !== undefined
+            ? [showDropdownState, setShowDropdownState]
+            : useState(false);
 
-    const dropdownRef = useRef<HTMLDivElement>(null);
+    const dropdownRef = ref ?? useRef<HTMLDivElement>(null);
 
     useModalEscapeEffect({ setShowModal: setShowDropdown });
     useModalMousedownEffect({
