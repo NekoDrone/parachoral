@@ -124,7 +124,6 @@ export const activitiesMap = (() => {
     return res;
 })();
 
-// TODO: Actually validate that the track's entries can resolve to the given slugs.
 export const tracksParsed = Object.entries(trackFiles)
     .map(([k, v]) => {
         const trackParse = Track.safeParse(v);
