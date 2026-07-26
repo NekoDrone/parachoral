@@ -57,9 +57,8 @@ export const Header = () => {
             >
                 {NAV_ITEMS.map((item) =>
                     item.type === "link" ? (
-                        <div className="inline-block">
+                        <div className="inline-block" key={item.label}>
                             <Link
-                                key={item.label}
                                 to={item.href}
                                 preload="intent"
                                 preloadIntentProximity={30}
@@ -76,6 +75,7 @@ export const Header = () => {
                                 </div>
                             }
                             className="flex flex-col gap-3 bg-surface0 border-overlay-1 border p-3 mt-2 ml-1"
+                            key={item.label}
                         >
                             {item.dropdownItems.map((dropdownItem) => (
                                 <a
