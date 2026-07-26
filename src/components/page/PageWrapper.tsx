@@ -5,7 +5,7 @@ export const PageWrapper = ({
     variant = "full",
 }: {
     children: ReactNode;
-    variant: "full" | "half";
+    variant?: "full" | "half";
 }) => {
     return variant === "full" ? (
         <main className="relative max-w-full px-7 min-h-screen">
