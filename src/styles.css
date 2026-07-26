@@ -1,5 +1,7 @@
 @import "@fontsource-variable/cormorant-garamond/wght.css";
+@import "@fontsource-variable/cormorant-garamond/wght-italic.css";
 @import "@fontsource-variable/inter-tight/wght.css";
+@import "@fontsource-variable/inter-tight/wght-italic.css";
 @import "@fontsource-variable/inconsolata/wght.css";
 @import "tailwindcss";
 

@@ -14,6 +14,10 @@
 export type Enumify<T> = T[keyof T];
 
 export const toRomanYear = (date: Date): string => {
+    return toRomanNumeral(date.getFullYear());
+};
+
+export const toRomanNumeral = (num: number): string => {
     const numerals: Array<[number, string]> = [
         [1000, "M"],
         [900, "CM"],
@@ -30,13 +34,12 @@ export const toRomanYear = (date: Date): string => {
         [1, "I"],
     ];
 
-    let year = date.getFullYear();
     let result = "";
 
     for (const [value, symbol] of numerals) {
-        while (year >= value) {
+        while (num >= value) {
             result += symbol;
-            year -= value;
+            num -= value;
         }
     }
 
