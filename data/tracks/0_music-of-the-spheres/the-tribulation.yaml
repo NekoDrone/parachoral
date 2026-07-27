@@ -10,3 +10,8 @@ links:
 albums:
     - albumSlug: music-of-the-spheres
       track: 4
+motifs:
+    - motifSlug: ishtar
+      origin: false
+      at: ["0:00-0:31"]
+      note: While it is likely the earliest version of the motif written, the ultimate source of it lies in the track Ishtar Sink.
