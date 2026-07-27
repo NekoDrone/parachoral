@@ -1,7 +1,7 @@
 import { CountUp } from "#/components/animated/CountUp";
 import { PageWrapper } from "#/components/page/PageWrapper";
 import { SortStrategy, Toolbar } from "#/components/page/Toolbar";
-import { TrackSection } from "#/components/tracks/TrackSection";
+import { ByRelease } from "#/components/tracks/TracksSection/ByRelease";
 import { getReleaseBySlug } from "#/lib/data/get-release-by-slug";
 import { tracksParsed } from "#/lib/load";
 import { sortTracksByRelease } from "#/lib/utils/track";
@@ -91,12 +91,12 @@ const TracksSectionWrapper = ({
             // eslint-disable-next-line no-case-declarations
             const tracksByRelease = sortTracksByRelease(tracksParsed);
 
-            return tracksByRelease.map(([releaseSlug, tracks]) => {
+            return tracksByRelease.map(([releaseSlug, tracks], i) => {
                 const release = getReleaseBySlug(releaseSlug);
                 if (releaseSlug !== "unreleased" && !release.ok)
                     throw new Error(release.error);
                 return (
-                    <TrackSection
+                    <ByRelease
                         release={
                             release.ok
                                 ? release.value
@@ -108,7 +108,7 @@ const TracksSectionWrapper = ({
                                 }
                         }
                         tracks={tracks}
-                        originsOnly={originsOnly}
+                        key={release.ok ? release.value.slug : i}
                     />
                 );
             });

@@ -5,7 +5,7 @@ import type { tracksParsed } from "#/lib/load";
 import { secondsToMinSecondsString } from "#/lib/utils/datetime";
 import { ArrowUpRightIcon, PlusIcon } from "@phosphor-icons/react";
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 export const TrackRow = ({
     track,
@@ -188,7 +188,7 @@ export const TrackRow = ({
                             <p className="text-[11px] tracking-widest mt-4 font-mono flex gap-2">
                                 <span className="text-subtext-1">Listen —</span>
                                 {track.links.map((l, i) => (
-                                    <>
+                                    <Fragment key={i}>
                                         <a
                                             key={l.source}
                                             href={l.url}
@@ -203,12 +203,15 @@ export const TrackRow = ({
                                         </a>
                                         {track.links &&
                                             i < track.links.length - 1 ? (
-                                            <span className="text-subtext-0">
+                                            <span
+                                                className="text-subtext-0"
+                                                key={l.source + "link"}
+                                            >
                                                 {" "}
                                                 ·{" "}
                                             </span>
                                         ) : null}
-                                    </>
+                                    </Fragment>
                                 ))}
                             </p>
                         )}

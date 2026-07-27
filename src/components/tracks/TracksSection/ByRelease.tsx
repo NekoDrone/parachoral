@@ -3,14 +3,12 @@ import type { tracksParsed } from "#/lib/load";
 import type { Release } from "#/lib/types/data/releases";
 import { toRomanNumeral } from "#/lib/utils";
 
-export const TrackSection = ({
+export const ByRelease = ({
     release,
     tracks,
-    originsOnly,
 }: {
     release: Release;
     tracks: Array<(typeof tracksParsed)[number]>;
-    originsOnly: boolean;
 }) => {
     const tracksSorted = tracks.toSorted(
         (a, b) => a.albums[0].track - b.albums[0].track,
@@ -39,9 +37,9 @@ export const TrackSection = ({
             </header>
 
             <ul className="divide-y divide-overlay-0">
-                {originsOnly
-                    ? tracksWithOrigins.map((t) => <TrackRow track={t} />)
-                    : tracksSorted.map((t) => <TrackRow track={t} />)}
+                {tracksSorted.map((t) => (
+                    <TrackRow track={t} key={t.slug}/>
+                ))}
             </ul>
         </section>
     );

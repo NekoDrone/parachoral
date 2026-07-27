@@ -79,7 +79,6 @@ export const Toolbar = ({
                             className="font-sans text-[11px] font-light uppercase tracking-[0.28em] text-subtext-1 transition-colors duration-200 hover:text-accent"
                             onClick={() => {
                                 setSortStrategy(strategy);
-                                console.log("Setting!!");
                                 setShowSortDropdown(false);
                             }}
                             key={strategy}
