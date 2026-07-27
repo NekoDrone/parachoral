@@ -148,16 +148,27 @@ export const TrackRow = ({
                                                             : "reprise"}
                                                     </span>
                                                 </div>
-                                                <span className="flex gap-1.5">
+                                                <span className="flex items-center">
                                                     {m.at.map((ts) => (
-                                                        <span
+                                                        <Fragment
                                                             key={ts.start}
-                                                            className="text-[10.5px] border border-solid border-text/13 py-0.5 px-1 font-mono text-subtext-1"
                                                         >
-                                                            {secondsToMinSecondsString(
-                                                                ts.start,
+                                                            <span className="text-[10.5px] border border-solid border-text/13 py-0.5 px-1 font-mono text-subtext-1">
+                                                                {secondsToMinSecondsString(
+                                                                    ts.start,
+                                                                )}
+                                                            </span>
+                                                            {ts.end && (
+                                                                <>
+                                                                    <span className="flex-1 h-0.5 bg-overlay-0 w-4" />
+                                                                    <span className="text-[10.5px] border border-solid border-text/13 py-0.5 px-1 font-mono text-subtext-1">
+                                                                        {secondsToMinSecondsString(
+                                                                            ts.end,
+                                                                        )}
+                                                                    </span>
+                                                                </>
                                                             )}
-                                                        </span>
+                                                        </Fragment>
                                                     ))}
                                                 </span>
                                             </div>

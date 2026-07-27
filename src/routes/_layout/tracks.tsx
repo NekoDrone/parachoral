@@ -6,6 +6,7 @@ import { getReleaseBySlug } from "#/lib/data/get-release-by-slug";
 import { tracksParsed } from "#/lib/load";
 import { sortTracksByRelease } from "#/lib/utils/track";
 import { createFileRoute } from "@tanstack/react-router";
+import { AnimatePresence } from "motion/react";
 import { useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 
@@ -116,22 +117,27 @@ const TracksSectionWrapper = ({
                 if (releaseSlug !== "unreleased" && !release.ok)
                     throw new Error(release.error);
 
-                if (tracks.length === 0) return <></>;
                 return (
-                    <ByRelease
-                        release={
-                            release.ok
-                                ? release.value
-                                : {
-                                    slug: "unreleased",
-                                    name: "Unreleased",
-                                    year: 0,
-                                    shorthand: "UNRL",
+                    <AnimatePresence initial={false}>
+                        {tracks.length !== 0 ? (
+                            <ByRelease
+                                release={
+                                    release.ok
+                                        ? release.value
+                                        : {
+                                            slug: "unreleased",
+                                            name: "Unreleased",
+                                            year: 0,
+                                            shorthand: "UNRL",
+                                        }
                                 }
-                        }
-                        tracks={tracks}
-                        key={release.ok ? release.value.slug : i}
-                    />
+                                tracks={tracks}
+                                key={release.ok ? release.value.slug : i}
+                            />
+                        ) : (
+                            <></>
+                        )}
+                    </AnimatePresence>
                 );
             });
         case SortStrategy.COMPOSER:
