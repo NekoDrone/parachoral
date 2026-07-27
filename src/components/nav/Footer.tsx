@@ -28,7 +28,7 @@ const ELSEWHERE_LINKS = [
 
 export const Footer = () => {
     return (
-        <footer className="px-7 pb-12 text-text relative">
+        <footer className="px-7 pb-8 text-text relative">
             <div className="mx-auto max-w-[1080px]">
                 <FinalBarline />
 
@@ -117,10 +117,15 @@ export const Footer = () => {
                         <p className="font-sans text-[10px] uppercase tracking-[0.18em] text-subtext-0">
                             Per Audacia ad Astra
                         </p>
+                        <p className="font-sans text-[10px] uppercase tracking-[0.18em] text-subtext-0">
+                            Ex Una Voce, Chorus
+                        </p>
                     </div>
-                    <p className="font-mono text-[10px] font-light tracking-[0.5em] text-subtext-0">
-                        {toRomanYear(new Date())}
-                    </p>
+                    <div className="flex items-end flex-col gap-2">
+                        <p className="font-mono text-[12px] font-light tracking-[0.4em] text-subtext-0">
+                            {toRomanYear(new Date())}
+                        </p>
+                    </div>
                 </div>
             </div>
             <Atmosphere
