@@ -7,7 +7,6 @@ import { getMotifBySlug } from "#/lib/data/get-motif-by-slug";
 import { getReleaseBySlug } from "#/lib/data/get-release-by-slug";
 import { tracksParsed } from "#/lib/load";
 import type { Release } from "#/lib/types/data/releases";
-import type { Track } from "#/lib/types/data/track";
 import { toRomanNumeral } from "#/lib/utils";
 import type { Enumify } from "#/lib/utils";
 import { secondsToMinSecondsString } from "#/lib/utils/datetime";
@@ -15,11 +14,10 @@ import { sortTracksByRelease } from "#/lib/utils/track";
 import {
     ArrowUpRightIcon,
     CaretDownIcon,
-    Plus,
     PlusIcon,
 } from "@phosphor-icons/react";
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { AnimatePresence, motion, secondsToMilliseconds } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 
@@ -256,7 +254,7 @@ const TrackSection = ({
         t.motifs.some((m) => m.origin),
     );
     return (
-        <section>
+        <section className="pb-4">
             <header className="flex align-baseline items-center gap-4 mb-2">
                 <span className="text-accent font-mono w-16 shrink-0 text-[13px]">
                     {releaseCardinality === 0
@@ -446,8 +444,15 @@ const TrackRow = ({ track }: { track: (typeof tracksParsed)[number] }) => {
                             </ul>
                         ) : (
                             <p className="italic text-[15px] text-text/50 my-[6px]">
-                                No motifs transcribed yet — this entry is
-                                awaiting a careful ear.
+                                No motifs have been heard in this track.
+                                Disagree?{" "}
+                                <a
+                                    href="https://github.com/NekoDrone/parachoral"
+                                    className="text-accent hover:text-text"
+                                >
+                                    Submit a change
+                                </a>
+                                .
                             </p>
                         )}
 
