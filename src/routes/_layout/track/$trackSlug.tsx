@@ -1,9 +1,10 @@
+import { PageWrapper } from "#/components/page/PageWrapper";
 import { getTrackBySlug } from "#/lib/data/get-track-by-slug";
 import { tracksMap } from "#/lib/load";
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { string } from "zod";
 
-export const Route = createFileRoute("/track/$trackSlug")({
+export const Route = createFileRoute("/_layout/track/$trackSlug")({
     loader: ({ params }) => {
         const track = getTrackBySlug(params.trackSlug);
         if (!track.ok)
@@ -55,5 +56,9 @@ export const Route = createFileRoute("/track/$trackSlug")({
 
 function RouteComponent() {
     const { trackSlug } = Route.useParams();
-    return <div>Hello "/track/$trackSlug"!</div>;
+    return (
+        <PageWrapper>
+            <div>Hello "/track/$trackSlug"!</div>
+        </PageWrapper>
+    );
 }

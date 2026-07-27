@@ -17,7 +17,7 @@ import { Route as LayoutAlbumsRouteImport } from './routes/_layout/albums'
 import { Route as LayoutMotifsRouteImport } from './routes/_layout/motifs'
 import { Route as LayoutReleasesRouteImport } from './routes/_layout/releases'
 import { Route as LayoutTracksRouteImport } from './routes/_layout/tracks'
-import { Route as TrackTrackSlugRouteImport } from './routes/track/$trackSlug'
+import { Route as LayoutTrackTrackSlugRouteImport } from './routes/_layout/track/$trackSlug'
 
 const LayoutRoute = LayoutRouteImport.update({
   id: '/_layout',
@@ -58,10 +58,10 @@ const LayoutTracksRoute = LayoutTracksRouteImport.update({
   path: '/tracks',
   getParentRoute: () => LayoutRoute,
 } as any)
-const TrackTrackSlugRoute = TrackTrackSlugRouteImport.update({
+const LayoutTrackTrackSlugRoute = LayoutTrackTrackSlugRouteImport.update({
   id: '/track/$trackSlug',
   path: '/track/$trackSlug',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => LayoutRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -72,7 +72,7 @@ export interface FileRoutesByFullPath {
   '/motifs': typeof LayoutMotifsRoute
   '/releases': typeof LayoutReleasesRoute
   '/tracks': typeof LayoutTracksRoute
-  '/track/$trackSlug': typeof TrackTrackSlugRoute
+  '/track/$trackSlug': typeof LayoutTrackTrackSlugRoute
 }
 export interface FileRoutesByTo {
   '/about': typeof LayoutAboutRoute
@@ -81,8 +81,8 @@ export interface FileRoutesByTo {
   '/motifs': typeof LayoutMotifsRoute
   '/releases': typeof LayoutReleasesRoute
   '/tracks': typeof LayoutTracksRoute
-  '/track/$trackSlug': typeof TrackTrackSlugRoute
   '/': typeof LayoutIndexRoute
+  '/track/$trackSlug': typeof LayoutTrackTrackSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -93,8 +93,8 @@ export interface FileRoutesById {
   '/_layout/motifs': typeof LayoutMotifsRoute
   '/_layout/releases': typeof LayoutReleasesRoute
   '/_layout/tracks': typeof LayoutTracksRoute
-  '/track/$trackSlug': typeof TrackTrackSlugRoute
   '/_layout/': typeof LayoutIndexRoute
+  '/_layout/track/$trackSlug': typeof LayoutTrackTrackSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -115,8 +115,8 @@ export interface FileRouteTypes {
     | '/motifs'
     | '/releases'
     | '/tracks'
-    | '/track/$trackSlug'
     | '/'
+    | '/track/$trackSlug'
   id:
     | '__root__'
     | '/_layout'
@@ -126,13 +126,12 @@ export interface FileRouteTypes {
     | '/_layout/motifs'
     | '/_layout/releases'
     | '/_layout/tracks'
-    | '/track/$trackSlug'
     | '/_layout/'
+    | '/_layout/track/$trackSlug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   LayoutRoute: typeof LayoutRouteWithChildren
-  TrackTrackSlugRoute: typeof TrackTrackSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -193,12 +192,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutTracksRouteImport
       parentRoute: typeof LayoutRoute
     }
-    '/track/$trackSlug': {
-      id: '/track/$trackSlug'
+    '/_layout/track/$trackSlug': {
+      id: '/_layout/track/$trackSlug'
       path: '/track/$trackSlug'
       fullPath: '/track/$trackSlug'
-      preLoaderRoute: typeof TrackTrackSlugRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof LayoutTrackTrackSlugRouteImport
+      parentRoute: typeof LayoutRoute
     }
   }
 }
@@ -211,6 +210,7 @@ interface LayoutRouteChildren {
   LayoutReleasesRoute: typeof LayoutReleasesRoute
   LayoutTracksRoute: typeof LayoutTracksRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
+  LayoutTrackTrackSlugRoute: typeof LayoutTrackTrackSlugRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
@@ -221,6 +221,7 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutReleasesRoute: LayoutReleasesRoute,
   LayoutTracksRoute: LayoutTracksRoute,
   LayoutIndexRoute: LayoutIndexRoute,
+  LayoutTrackTrackSlugRoute: LayoutTrackTrackSlugRoute,
 }
 
 const LayoutRouteWithChildren =
@@ -228,7 +229,6 @@ const LayoutRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   LayoutRoute: LayoutRouteWithChildren,
-  TrackTrackSlugRoute: TrackTrackSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
