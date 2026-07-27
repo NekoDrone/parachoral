@@ -3,36 +3,49 @@ import { hexToRgba, isRgbColor } from "#/lib/utils/color";
 const resolveColor = (color: string, opacity?: number) =>
     isRgbColor(color) ? color : hexToRgba(color, opacity);
 
-type AtmosphereProps = {
-    /** rgba()/rgb() string, or a hex color (#rgb, #rgba, #rrggbb, #rrggbbaa) */
-    color?: string;
-    /** 0–1, only applied when `color` is hex — overrides any alpha in the hex itself */
-    opacity?: number;
-    /** ellipse size, e.g. "900px 480px" */
-    size?: string;
-    /** gradient origin, e.g. "50% -8%" */
-    position?: string;
-    /** distance at which the gradient fades to transparent */
-    fade?: string;
-    className?: string;
-};
+const edgeDefaults = {
+    top: { position: "50% -8%", height: "480px" },
+    bottom: { position: "50% 108%", height: "480px" },
+} as const;
 
 export const Atmosphere = ({
+    variant = "top",
     color = "rgba(97, 126, 180, 0.13)",
     opacity,
     size = "900px 480px",
-    position = "50% -8%",
+    position,
+    positioning = "fixed",
     fade = "65%",
+    height,
     className = "",
-}: AtmosphereProps) => {
+}: {
+    variant?: "top" | "bottom";
+    color?: string;
+    opacity?: number;
+    size?: string;
+    position?: string;
+    positioning: "fixed" | "absolute";
+    fade?: string;
+    height?: string;
+    className?: string;
+}) => {
     const resolved = resolveColor(color, opacity);
+    const defaults = edgeDefaults[variant];
+    const resolvedPosition = position ?? defaults.position;
+    const resolvedHeight = height ?? defaults.height;
+
+    const positioningClass =
+        positioning === "fixed"
+            ? "fixed inset-0"
+            : "absolute inset-x-0 bottom-0";
 
     return (
         <div
             aria-hidden
-            className={`pointer-events-none fixed inset-0 ${className}`}
+            className={`pointer-events-none ${positioningClass} ${className}`}
             style={{
-                backgroundImage: `radial-gradient(${size} at ${position}, ${resolved}, transparent ${fade})`,
+                ...(variant === "bottom" ? { height: resolvedHeight } : {}),
+                backgroundImage: `radial-gradient(${size} at ${resolvedPosition}, ${resolved}, transparent ${fade})`,
             }}
         />
     );

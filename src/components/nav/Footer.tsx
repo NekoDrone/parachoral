@@ -1,3 +1,4 @@
+import { Atmosphere } from "#/components/misc/Atmosphere";
 import { FinalBarline } from "#/components/misc/FinalBarline";
 import { toRomanYear } from "#/lib/utils";
 import { Link } from "@tanstack/react-router";
@@ -26,7 +27,7 @@ const ELSEWHERE_LINKS = [
 
 export const Footer = () => {
     return (
-        <footer className="px-7 pb-12 text-text">
+        <footer className="px-7 pb-12 text-text relative">
             <div className="mx-auto max-w-[1080px]">
                 <FinalBarline />
 
@@ -122,6 +123,7 @@ export const Footer = () => {
                     </p>
                 </div>
             </div>
+            <Atmosphere variant="bottom" positioning="absolute" color="#c7a65b12"/>
         </footer>
     );
 };

@@ -10,12 +10,12 @@ export const PageWrapper = ({
 }) => {
     return variant === "full" ? (
         <main className="relative max-w-full px-7 min-h-screen">
-            <Atmosphere />
+            <Atmosphere variant="top" positioning="fixed" />
             {children}
         </main>
     ) : (
         <main className="relative px-7 min-h-screen mx-auto max-w-[1080px]">
-            <Atmosphere />
+            <Atmosphere variant="top" positioning="fixed" />
             {children}
         </main>
     );
