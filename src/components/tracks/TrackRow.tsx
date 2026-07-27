@@ -1,23 +1,23 @@
 import { Diamond } from "#/components/misc/Diamond";
 import { getActivityBySlug } from "#/lib/data/get-activity-by-slug";
 import { getMotifBySlug } from "#/lib/data/get-motif-by-slug";
-import { tracksParsed } from "#/lib/load";
+import type { tracksParsed } from "#/lib/load";
 import { secondsToMinSecondsString } from "#/lib/utils/datetime";
 import { ArrowUpRightIcon, PlusIcon } from "@phosphor-icons/react";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 
-export const TrackRow = ({ track }: { track: (typeof tracksParsed)[number] }) => {
+export const TrackRow = ({
+    track,
+}: {
+    track: (typeof tracksParsed)[number];
+}) => {
     const [open, setOpen] = useState(false);
 
     const hasOrigin = track.motifs.some((m) => m.origin);
     const trackMainActivityResult =
         track.playsIn.length > 0 &&
         getActivityBySlug(track.playsIn[0].activitySlug);
-    const trackTotalNumber =
-        tracksParsed.findIndex(
-            (t) => t.slug === track.slug && t.release === track.release,
-        ) + 1;
 
     return (
         <li
@@ -37,7 +37,8 @@ export const TrackRow = ({ track }: { track: (typeof tracksParsed)[number] }) =>
             >
                 <div className="flex gap-2 items-center">
                     <span className="font-mono text-xs tracking-wide text-subtext-0 w-22">
-                        PCH-{String(trackTotalNumber).padStart(3, "0")}
+                        {track.release.shorthand}-
+                        {String(track.order).padStart(3, "0")}
                     </span>
                     <span className="font-serif text-[20px] leading-tight transition-colors w-64">
                         <Link

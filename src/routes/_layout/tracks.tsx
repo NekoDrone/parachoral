@@ -60,10 +60,10 @@ function RouteComponent() {
                         aria-hidden="true"
                     >
                         <span>No.</span>
-                        <span>Title</span>
-                        <span>Composers</span>
-                        <span>Heard in</span>
-                        <span className="text-right">Motifs</span>
+                        <span> Title </span>
+                        <span> Composers </span>
+                        <span> Heard in </span>
+                        <span className="text-right"> Motifs </span>
                         <span />
                     </div>
                     <TracksSectionWrapper
@@ -93,10 +93,20 @@ const TracksSectionWrapper = ({
 
             return tracksByRelease.map(([releaseSlug, tracks]) => {
                 const release = getReleaseBySlug(releaseSlug);
-                if (!release.ok) throw new Error(release.error);
+                if (releaseSlug !== "unreleased" && !release.ok)
+                    throw new Error(release.error);
                 return (
                     <TrackSection
-                        release={release.value}
+                        release={
+                            release.ok
+                                ? release.value
+                                : {
+                                    slug: "unreleased",
+                                    name: "Unreleased",
+                                    year: 0,
+                                    shorthand: "UNRL",
+                                }
+                        }
                         tracks={tracks}
                         originsOnly={originsOnly}
                     />

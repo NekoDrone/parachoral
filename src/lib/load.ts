@@ -46,6 +46,12 @@ export const releasesParsed = (() => {
 export const releasesMap = (() => {
     const res = new Map<string, (typeof releasesParsed)[number]>();
     releasesParsed.forEach((release) => res.set(release.slug, release));
+    res.set("unreleased", {
+        slug: "unreleased",
+        name: "Unreleased",
+        year: 0,
+        shorthand: "UNRL",
+    });
     return res;
 })();
 
@@ -161,6 +167,7 @@ export const tracksParsed = Object.entries(trackFiles)
                     slug: "unreleased",
                     name: "Unreleased",
                     year: 0,
+                    shorthand: "UNRL",
                 }),
                 slug: slugFromPath(k),
             };

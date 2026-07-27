@@ -2,6 +2,7 @@ import { Sources } from "#/lib/types/data";
 import { Activity } from "#/lib/types/data/activity";
 import { Album } from "#/lib/types/data/album";
 import { Motif } from "#/lib/types/data/motif";
+import { Release } from "#/lib/types/data/releases";
 import { z } from "zod";
 
 export const TrackTimestamp = z
@@ -35,6 +36,7 @@ export const Track = z.object({
     title: z.string(),
     composers: z.array(z.string()).min(1),
     description: z.string().optional(),
+    order: z.number().min(1),
     links: Sources.optional(),
     albums: z
         .array(
@@ -108,6 +110,8 @@ export const TrackResolved = z.object({
     albums: z.array(TrackAlbumResolved).default([]),
     playsIn: z.array(TrackActivityResolved).default([]),
     motifs: z.array(TrackMotifResolved),
+    slug: z.string(),
+    release: { ...Release.shape },
 });
 
 export type TrackResolved = z.infer<typeof TrackResolved>;
