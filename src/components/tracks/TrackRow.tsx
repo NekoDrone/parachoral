@@ -160,7 +160,7 @@ export const TrackRow = ({
                                                             </span>
                                                             {ts.end && (
                                                                 <>
-                                                                    <span className="flex-1 h-0.5 bg-overlay-0 w-4" />
+                                                                    <span className="flex-1 h-0.5 bg-overlay-0 w-2" />
                                                                     <span className="text-[10.5px] border border-solid border-text/13 py-0.5 px-1 font-mono text-subtext-1">
                                                                         {secondsToMinSecondsString(
                                                                             ts.end,
