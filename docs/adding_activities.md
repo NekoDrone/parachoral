@@ -6,7 +6,7 @@ To add an activity to Parachoral, open the `/data` directory located at the proj
 
 Then, open the `/activities` directory. You are now in `/data/activities`. This directory is organised as a collection of activities by type. Each activity type will be separated and initially sorted in alphabetical order on the `/activities` route in the application.
 
-Each activity has a type which must be sorted. Any loose activities in this folder (`/data/activities/*.yaml`) will cause validation to fail. If you are unable to sort an activity into its specified type (for some reason), you may fall back to using `/data/activities/others/*.yaml`.
+Each activity has a type which must be sorted. Any loose activities in this directory (`/data/activities/*.yaml`) will cause validation to fail. If you are unable to sort an activity into its specified type (for some reason), you may fall back to using `/data/activities/others/*.yaml`.
 
 You may optionally copy the template YAML file located at `/docs/templates/activity.yaml` to the appropriate location and name.
 
