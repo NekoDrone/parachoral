@@ -23,6 +23,7 @@ export const Toolbar = ({
     sortStrategy,
     setSortStrategy,
     placeholder,
+    numberFound
 }: {
     query: string;
     setQuery: Dispatch<SetStateAction<string>>;
@@ -32,6 +33,7 @@ export const Toolbar = ({
     sortStrategy: SortStrategy;
     setSortStrategy: Dispatch<SetStateAction<SortStrategy>>;
     placeholder?: string;
+    numberFound: number;
 }) => {
     const [showSortDropdown, setShowSortDropdown] = useState(false);
 
@@ -115,7 +117,7 @@ export const Toolbar = ({
                             transition={{ duration: 0.1, ease: "easeOut" }}
                         >
                             <p className="text-subtext-1 italic">
-                                37 tracks found.
+                            {numberFound} tracks found.
                             </p>
                         </motion.div>
                     )}

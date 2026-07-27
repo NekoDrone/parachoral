@@ -7,6 +7,7 @@ import { tracksParsed } from "#/lib/load";
 import { sortTracksByRelease } from "#/lib/utils/track";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 
 export const Route = createFileRoute("/_layout/tracks")({
     component: RouteComponent,
@@ -18,6 +19,7 @@ function RouteComponent() {
     const [sortStrategy, setSortStrategy] = useState<SortStrategy>(
         SortStrategy.RELEASE,
     );
+    const [tracksCount, setTracksCount] = useState(tracksParsed.length);
 
     return (
         <PageWrapper variant="half">
@@ -49,6 +51,7 @@ function RouteComponent() {
                     sortStrategy={sortStrategy}
                     setSortStrategy={setSortStrategy}
                     placeholder="Search by title, composer, motif, or activity"
+                    numberFound={tracksCount}
                 />
             </section>
 
@@ -70,6 +73,7 @@ function RouteComponent() {
                         query={query}
                         originsOnly={originsOnly}
                         sortStrategy={sortStrategy}
+                        setTracksCount={setTracksCount}
                     />
                 </div>
             </div>
@@ -81,20 +85,38 @@ const TracksSectionWrapper = ({
     query,
     originsOnly,
     sortStrategy,
+    setTracksCount,
 }: {
     query: string;
     originsOnly: boolean;
     sortStrategy: SortStrategy;
+    setTracksCount: Dispatch<SetStateAction<number>>;
 }) => {
     switch (sortStrategy) {
         case SortStrategy.RELEASE:
             // eslint-disable-next-line no-case-declarations
             const tracksByRelease = sortTracksByRelease(tracksParsed);
 
+            if (originsOnly) {
+                tracksByRelease.forEach(
+                    ([slug, ts], i) =>
+                    (tracksByRelease[i] = [
+                        slug,
+                        ts.filter((t) => t.motifs.some((m) => m.origin)),
+                    ]),
+                );
+            }
+
+            setTracksCount(
+                tracksByRelease.reduce((acc, [_, ts]) => (acc += ts.length), 0),
+            );
+
             return tracksByRelease.map(([releaseSlug, tracks], i) => {
                 const release = getReleaseBySlug(releaseSlug);
                 if (releaseSlug !== "unreleased" && !release.ok)
                     throw new Error(release.error);
+
+                if (tracks.length === 0) return <></>;
                 return (
                     <ByRelease
                         release={
