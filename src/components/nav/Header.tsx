@@ -1,5 +1,6 @@
 import { DropdownModal } from "#/components/dropdown/DropdownModal";
 import { Link } from "@tanstack/react-router";
+import { useState } from "react";
 
 interface NavItemBase {
     label: string;
@@ -40,6 +41,8 @@ const NAV_ITEMS: Array<NavItem> = [
 ];
 
 export const Header = () => {
+    const [showDropdown, setShowDropdown] = useState(false);
+
     return (
         <header className="flex max-w-full items-center gap-9 border-b border-overlay-1 px-7 py-5">
             <Link
@@ -50,7 +53,6 @@ export const Header = () => {
                 <span className="tracking-[0.2em] text-accent">.FM</span>
             </Link>
 
-            {/* Swap <a> for the router's typed <Link> as each route lands */}
             <nav
                 aria-label="Primary"
                 className="ml-auto gap-6 md:flex flex items-center"
@@ -76,12 +78,15 @@ export const Header = () => {
                             }
                             className="flex flex-col gap-3 bg-surface0 border-overlay-1 border p-3 mt-2 ml-1"
                             key={item.label}
+                            showDropdownState={showDropdown}
+                            setShowDropdownState={setShowDropdown}
                         >
                             {item.dropdownItems.map((dropdownItem) => (
                                 <Link
                                     to={dropdownItem.label}
                                     href={dropdownItem.href}
                                     className="font-sans text-[11px] font-light uppercase tracking-[0.28em] text-subtext-1 transition-colors duration-200 hover:text-accent"
+                                    onClick={() => setShowDropdown(false)}
                                 >
                                     {dropdownItem.label}
                                 </Link>
