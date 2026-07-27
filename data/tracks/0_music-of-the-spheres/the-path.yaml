@@ -1,6 +1,6 @@
 title: The Path
 composers: [Martin O'Donnell, Michael Salvatori, Paul McCartney]
-description: The Moon, written in the key of C.
+description: The Moon, written in the key of C. The opening minute of this track plays towards the end of The Traveler.
 order: 1
 links:
     - source: youtube
@@ -10,3 +10,8 @@ links:
 albums:
     - albumSlug: music-of-the-spheres
       track: 1
+motifs:
+    - motifSlug: traveler
+      origin: false
+      at: ["0:18-0:20"]
+      note: The first sign of the Traveler.

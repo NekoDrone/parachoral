@@ -1,6 +1,6 @@
 title: The Traveler
 composers: [Michael Salvatori, C Paul Johnson, Martin O'Donnell, Paul McCartney]
-description: The opening theme of Destiny, plays in the first cutscene involving Ares One.
+description: The opening theme of Destiny, plays in the first cutscene involving Ares One. At the 1:30 mark, contains an excerpt from The Path.
 order: 1
 links:
     - source: youtube
@@ -10,3 +10,8 @@ links:
 albums:
     - albumSlug: destiny-ost
       track: 1
+motifs:
+    - motifSlug: traveler
+      origin: true
+      at: ["0:00-0:20"]
+      note: An anthem of Light.
