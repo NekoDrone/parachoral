@@ -91,3 +91,15 @@ All data is provided to the application through the use of YAML files. YAML is a
 In order to write YAML files, you'll need an editor. If you are on Windows, Microsoft's default Notepad is a perfectly fine editor for YAML files. However, I recommend you pick up a proper code editor like [VSCode](https://code.visualstudio.com/Download) (or [Codium](https://vscodium.com/)), or at the very minimum, [Notepad++](https://notepad-plus-plus.org/downloads/).
 
 When you have a program suitable for reading and writing text files, simply create the relevant files with the YAML extension (`*.yaml`) into the right directories.
+
+## Credits
+
+Parachoral could not exist without the following people, all of whom I thank deeply for their contributions and inspirations.
+
+- Esby, author of the original [Eorzea Songbook](https://eorzeasongbook.com/credits). Without them, the idea of Parachoral would not have come to me.
+- Atlyx and the rest of the Archivists in Last City Radio, for their work on the [Destiny Music Archive](https://www.youtube.com/@destiny_music_archive). Without them or the Archive, finding every piece of music would have been insurmountably difficult.
+- Each and every contributor to the project, whether it be code or information. Without you, this project would have taken that much longer to get going.
+- Lyna and Layla. Without you two, I would be a lost light in the dark.
+- You and the rest of the Destiny community, for reading (and hopefully contributing to) the project. Without you, this project wouldn't matter whatsoever. You help keep Destiny's flame alive in spite of the circumstances.
+- Bungie, and the people who have spent countless hours making and building this game and world that we have called home for the longest time. Without them, Destiny would not exist. May your future be filled with the same hope as you've given us.
+- And finally, Michael Salvatori, Paul McCartney, C. Paul Johnson, Skye Lewin, Rotem Moav, Pieter Schlosser, Michael Sechrist, Josh Mosser, and every other composer or artist that has left their mark on the music of Destiny. If any of you are somehow reading this, thank you for everything you have done to create, inspire, and remember. Yours is a legacy like none other, and I only hope to have built something that can live up to the incredible work that you have put in. From the very bottom of my heart, thank you.
