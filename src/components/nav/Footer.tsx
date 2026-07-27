@@ -1,5 +1,6 @@
 import { Atmosphere } from "#/components/misc/Atmosphere";
 import { FinalBarline } from "#/components/misc/FinalBarline";
+import { RuleMark } from "#/components/misc/RuleMark";
 import { toRomanYear } from "#/lib/utils";
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
@@ -104,9 +105,8 @@ export const Footer = () => {
                         </ul>
                     </nav>
                 </div>
-
-                {/* Imprint */}
-                <div className="flex flex-wrap items-baseline justify-between gap-x-10 gap-y-5 border-t border-overlay-0 pt-8">
+                <RuleMark />
+                <div className="flex flex-wrap items-baseline justify-between gap-x-10 gap-y-5 pt-8">
                     <div className="max-w-[56ch] space-y-2.5">
                         <p className="text-sm leading-relaxed text-subtext-1">
                             All music © Bungie, Inc. Parachoral is an unofficial
@@ -123,7 +123,11 @@ export const Footer = () => {
                     </p>
                 </div>
             </div>
-            <Atmosphere variant="bottom" positioning="absolute" color="#c7a65b12"/>
+            <Atmosphere
+                variant="bottom"
+                positioning="absolute"
+                color="#c7a65b12"
+            />
         </footer>
     );
 };
