@@ -2,10 +2,10 @@ title: The Path
 composers: [Martin O'Donnell, Michael Salvatori, Paul McCartney]
 description: The Moon, written in the key of C.
 links:
-    - source: spotify
-      url: https://open.spotify.com/track/2VY3ya2ykisNSIT00NVZW1
     - source: youtube
       url: https://www.youtube.com/watch?v=Toh7-HYatlE&list=PLmyezDVOWRowkkv5wBTiAERJsuKnDIxzD&index=1
+    - source: spotify
+      url: https://open.spotify.com/track/2VY3ya2ykisNSIT00NVZW1
 albums:
     - albumSlug: music-of-the-spheres
       track: 1

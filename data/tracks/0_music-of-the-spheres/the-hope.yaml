@@ -1,0 +1,11 @@
+title: The Hope
+composers: [Martin O'Donnell, Michael Salvatori, Paul McCartney]
+description: Earth, written in the key of C.
+links:
+    - source: youtube
+      url: https://www.youtube.com/watch?v=mLllQ-q1cgA&list=OLAK5uy_mk7D3BRnf6oD7598KpUKRuazV2cdkz-VQ&index=8
+    - source: spotify
+      url: https://open.spotify.com/track/3JCyT8Q1ODbdNTooN83Xip
+albums:
+    - albumSlug: music-of-the-spheres
+      track: 8
