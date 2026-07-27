@@ -11,7 +11,11 @@ albums:
     - albumSlug: music-of-the-spheres
       track: 1
 motifs:
+    - motifSlug: path
+      origin: true 
+      at: ["0:18-0:20"]
+      note: Steps along a cosmic trail.
     - motifSlug: traveler
       origin: false
-      at: ["0:18-0:20"]
+      at: ["1:04-1:11"]
       note: The first sign of the Traveler.
