@@ -31,9 +31,9 @@ export const Breadcrumb = () => {
             `${releaseCardinality === 0
                 ? "Prelude"
                 : toRomanNumeral(releaseCardinality)
-            } - ${release.name}`,
+            } - ${release.shorthand}`,
         );
-        breadcrumbText.push(track.value.title)
+        breadcrumbText.push(track.value.title);
     }
     const finalBreadcrumbText = ["parachoral"]
         .concat(

@@ -93,6 +93,7 @@ export const TrackMotifResolved = z.object({
     at: z.array(TrackTimestamp).min(1),
     note: z.string().optional(),
     clip: z.string().optional(),
+    motifSlug: z.string(),
 });
 
 export type TrackMotifResolved = z.infer<typeof TrackMotifResolved>;

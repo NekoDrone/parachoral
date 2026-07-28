@@ -323,18 +323,18 @@ const scaffold = async (rows) => {
                 releasedAt: albumsOnDisk.has(albumSlug)
                     ? undefined
                     : (previous?.releasedAt ??
-                      `${Number.isFinite(year) ? year : 1970}-01-01`),
+                        `${Number.isFinite(year) ? year : 1970}-01-01`),
                 // Only offer the per-track escape hatch once the whole-album
                 // mapping has been explicitly given up on.
                 tracks:
                     releaseSlug === null
                         ? albumRows
-                              .map((r) => kebab(r.title))
-                              .sort()
-                              .map((slug) => [
-                                  slug,
-                                  previous?.tracks?.[slug] ?? null,
-                              ])
+                            .map((r) => kebab(r.title))
+                            .sort()
+                            .map((slug) => [
+                                slug,
+                                previous?.tracks?.[slug] ?? null,
+                            ])
                         : undefined,
                 year,
             };
