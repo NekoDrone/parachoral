@@ -54,7 +54,7 @@ export const Breadcrumb = () => {
     return (
         <nav
             aria-label="Breadcrumb"
-            className="flex font-mono font-light text-[11px] pt-4 pl-4 uppercase text-subtext-1 tracking-widest"
+            className="flex font-mono font-light text-[11px] pt-4 uppercase text-subtext-1 tracking-widest"
         >
             {finalBreadcrumbText.join(" · ")}
         </nav>
