@@ -14,6 +14,8 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 
 import { dirname, join } from "node:path";
 import { createInterface } from "node:readline/promises";
 import { fileURLToPath } from "node:url";
+import { kebab } from "./lib/slug.mjs";
+import { trackToYaml } from "./lib/yaml.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const dataDir = join(root, "data");
@@ -61,15 +63,6 @@ const releases = () => {
     }
     return res;
 };
-
-const kebab = (s) =>
-    s
-        .normalize("NFKD")
-        .replace(/\p{Diacritic}/gu, "")
-        .toLowerCase()
-        .replace(/['’]/g, "")
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-+|-+$/g, "");
 
 const ask = async (question, fallback) => {
     const suffix = fallback === undefined ? "" : ` (${fallback})`;
@@ -146,78 +139,6 @@ const sourceFromUrl = (url) => {
     return host.split(".")[0] || "other";
 };
 
-// --- yaml emission ---------------------------------------------------------
-// Small enough to hand-roll; keeps the script dependency-free.
-
-const needsQuotes = (s, { flow = false } = {}) =>
-    s === "" ||
-    s !== s.trim() ||
-    /^[-?:,[\]{}#&*!|>'"%@`]/.test(s) ||
-    /:\s|\s#/.test(s) ||
-    /[\n\r]/.test(s) ||
-    /^(?:true|false|null|~|-?\d+(?:\.\d+)?|\d+:\d+)$/i.test(s) ||
-    (flow && /[,[\]{}]/.test(s));
-
-const scalar = (value, options) => {
-    const s = String(value);
-    return needsQuotes(s, options) ? JSON.stringify(s) : s;
-};
-
-const flowSeq = (values) => `[${values.map((v) => scalar(v, { flow: true })).join(", ")}]`;
-
-/** Timestamps are always quoted — bare `1:20` is sexagesimal in YAML 1.1. */
-const quotedFlowSeq = (values) => `[${values.map((v) => JSON.stringify(String(v))).join(", ")}]`;
-
-/** Emit `key: value` pairs at `indent`, skipping undefined/empty entries. */
-const block = (pairs, indent = "") =>
-    pairs
-        .filter(([, value]) => value !== undefined && value !== "")
-        .map(([key, value]) => `${indent}${key}: ${value}`);
-
-const toYaml = (track) => {
-    const lines = [
-        `title: ${scalar(track.title)}`,
-        `composers: ${flowSeq(track.composers)}`,
-        ...block([["description", track.description && scalar(track.description)]]),
-    ];
-
-    if (track.links.length) {
-        lines.push("links:");
-        for (const link of track.links) {
-            lines.push(`    - source: ${scalar(link.source)}`);
-            lines.push(`      url: ${scalar(link.url)}`);
-            lines.push(...block([["note", link.note && scalar(link.note)]], "      "));
-        }
-    }
-
-    if (track.albums.length) {
-        lines.push("albums:");
-        for (const album of track.albums) {
-            lines.push(`    - albumSlug: ${scalar(album.albumSlug)}`);
-            lines.push(`      track: ${album.track}`);
-        }
-    }
-
-    if (track.playsIn.length) {
-        lines.push("playsIn:");
-        for (const activity of track.playsIn) {
-            lines.push(`    - activitySlug: ${scalar(activity.activitySlug)}`);
-        }
-    }
-
-    if (track.motifs.length) {
-        lines.push("motifs:");
-        for (const motif of track.motifs) {
-            lines.push(`    - motifSlug: ${scalar(motif.motifSlug)}`);
-            if (motif.origin) lines.push("      origin: true");
-            lines.push(`      at: ${quotedFlowSeq(motif.at)}`);
-            lines.push(...block([["note", motif.note && scalar(motif.note)]], "      "));
-        }
-    }
-
-    return `${lines.join("\n")}\n`;
-};
-
 // --- prompts ---------------------------------------------------------------
 
 const main = async () => {
@@ -285,7 +206,7 @@ const main = async () => {
         if (!(await askYesNo("  another motif?"))) break;
     }
 
-    const yaml = toYaml({
+    const yaml = trackToYaml({
         title,
         composers,
         description: description || undefined,
