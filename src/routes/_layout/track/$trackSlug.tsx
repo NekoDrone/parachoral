@@ -104,6 +104,12 @@ function RouteComponent() {
                     </span>
                     <Diamond filled={false} size={3} />
                     <span>{toRomanNumeral(track.release.year)}</span>
+                    {track.runtime && (
+                        <>
+                            <Diamond filled={false} size={3} />
+                            <span>{track.runtime}</span>
+                        </>
+                    )}
                     {track.motifs.some((m) => m.origin) && (
                         <Fragment>
                             <Diamond filled={false} size={3} />
@@ -124,7 +130,9 @@ function RouteComponent() {
                     )}
                 </div>
                 {track.description && (
-                    <p className="text-lg text-wrap max-w-120 text-center">{track.description}</p>
+                    <p className="text-lg text-wrap max-w-120 text-center">
+                        {track.description}
+                    </p>
                 )}
             </section>
         </PageWrapper>
