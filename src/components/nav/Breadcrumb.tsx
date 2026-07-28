@@ -1,4 +1,3 @@
-import { getReleaseBySlug } from "#/lib/data/get-release-by-slug";
 import { getTrackBySlug } from "#/lib/data/get-track-by-slug";
 import { toRomanNumeral } from "#/lib/utils";
 import type { Enumify } from "#/lib/utils";
@@ -29,10 +28,10 @@ export const Breadcrumb = () => {
         const release = track.value.release;
         const releaseCardinality = Number.parseInt(release.slug.split("_")[0]);
         breadcrumbText.push(
-            `${release.name} - ${releaseCardinality === 0
+            `${releaseCardinality === 0
                 ? "Prelude"
                 : toRomanNumeral(releaseCardinality)
-            }`,
+            } - ${release.name}`,
         );
         breadcrumbText.push(track.value.title)
     }
@@ -55,7 +54,7 @@ export const Breadcrumb = () => {
     return (
         <nav
             aria-label="Breadcrumb"
-            className="flex font-mono font-light text-[11px] pt-2 uppercase text-subtext-1 tracking-widest"
+            className="flex font-mono font-light text-[11px] pt-4 pl-4 uppercase text-subtext-1 tracking-widest"
         >
             {finalBreadcrumbText.join(" · ")}
         </nav>

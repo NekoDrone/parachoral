@@ -57,7 +57,7 @@ export const Route = createFileRoute("/_layout/track/$trackSlug")({
 function RouteComponent() {
     const track = Route.useLoaderData();
     return (
-        <PageWrapper>
+        <PageWrapper variant="half">
             <Breadcrumb />
             <div>{track.title}</div>
         </PageWrapper>
