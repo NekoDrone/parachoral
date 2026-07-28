@@ -1,8 +1,8 @@
+import { Breadcrumb } from "#/components/nav/Breadcrumb";
 import { PageWrapper } from "#/components/page/PageWrapper";
 import { getTrackBySlug } from "#/lib/data/get-track-by-slug";
 import { tracksMap } from "#/lib/load";
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { string } from "zod";
 
 export const Route = createFileRoute("/_layout/track/$trackSlug")({
     loader: ({ params }) => {
@@ -55,10 +55,11 @@ export const Route = createFileRoute("/_layout/track/$trackSlug")({
 });
 
 function RouteComponent() {
-    const { trackSlug } = Route.useParams();
+    const track = Route.useLoaderData();
     return (
         <PageWrapper>
-            <div>Hello "/track/$trackSlug"!</div>
+            <Breadcrumb />
+            <div>{track.title}</div>
         </PageWrapper>
     );
 }

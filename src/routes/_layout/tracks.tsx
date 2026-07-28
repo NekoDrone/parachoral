@@ -1,4 +1,5 @@
 import { CountUp } from "#/components/animated/CountUp";
+import { Breadcrumb } from "#/components/nav/Breadcrumb";
 import { PageWrapper } from "#/components/page/PageWrapper";
 import { SortStrategy, Toolbar } from "#/components/page/Toolbar";
 import { ByRelease } from "#/components/tracks/TracksSection/ByRelease";
@@ -24,7 +25,8 @@ function RouteComponent() {
 
     return (
         <PageWrapper variant="half">
-            <section className="pt-16 max-w-[1080px]">
+            <Breadcrumb />
+            <section className="pt-8 max-w-[1080px]">
                 <p className="font-light font-sans text-accent uppercase tracking-[0.42em] text-[11px] m-0">
                     Arranged by
                 </p>
