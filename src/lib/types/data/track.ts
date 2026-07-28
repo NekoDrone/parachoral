@@ -111,7 +111,7 @@ export const TrackResolved = z.object({
     playsIn: z.array(TrackActivityResolved).default([]),
     motifs: z.array(TrackMotifResolved),
     slug: z.string(),
-    release: { ...Release.shape },
+    release: z.object({ ...Release.shape }),
 });
 
 export type TrackResolved = z.infer<typeof TrackResolved>;
