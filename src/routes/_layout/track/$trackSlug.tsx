@@ -1,8 +1,12 @@
+import { Diamond } from "#/components/misc/Diamond";
+import { RuleMark } from "#/components/misc/RuleMark";
 import { Breadcrumb } from "#/components/nav/Breadcrumb";
 import { PageWrapper } from "#/components/page/PageWrapper";
 import { getTrackBySlug } from "#/lib/data/get-track-by-slug";
 import { tracksMap } from "#/lib/load";
-import { createFileRoute, notFound } from "@tanstack/react-router";
+import { toRomanNumeral } from "#/lib/utils";
+import { Link, createFileRoute, notFound } from "@tanstack/react-router";
+import { Fragment } from "react/jsx-runtime";
 
 export const Route = createFileRoute("/_layout/track/$trackSlug")({
     loader: ({ params }) => {
@@ -56,10 +60,70 @@ export const Route = createFileRoute("/_layout/track/$trackSlug")({
 
 function RouteComponent() {
     const track = Route.useLoaderData();
+    const { release } = track;
+    const releaseCardinality = Number.parseInt(release.slug.split("_")[0]);
+
     return (
         <PageWrapper variant="half">
             <Breadcrumb />
-            <div>{track.title}</div>
+            <section className="pt-12 max-w-[1080px] flex flex-col items-center">
+                <div className="font-sans font-light text-[11px] text-subtext-0 uppercase tracking-[0.24em] flex gap-4 items-center">
+                    <span>
+                        {releaseCardinality === 0
+                            ? "Prelude"
+                            : toRomanNumeral(releaseCardinality)}{" "}
+                        - {track.release.name}
+                    </span>
+                    <Diamond filled size={5} />
+                    <span>
+                        {release.shorthand}-
+                        {String(track.order).padStart(3, "0")}
+                    </span>
+                </div>
+                <h2 className="tracking-wide text-7xl font-normal uppercase mt-4">
+                    {track.title}
+                </h2>
+                <div className="italic text-subtext-1 mt-3 flex gap-2 tracking-wide text-[16px] font-light">
+                    {track.composers.map((c, i) =>
+                        i === track.composers.length - 1 ? (
+                            <span>{c}</span>
+                        ) : (
+                            <>
+                                <span>{c}</span>
+                                <span>·</span>
+                            </>
+                        ),
+                    )}
+                </div>
+            </section>
+            <RuleMark width={600} className="mx-auto" />
+            <section className="pt-8 max-w-[1080px] flex flex-col items-center">
+                <div className="font-sans font-light text-[11px] text-subtext-1 uppercase tracking-[0.24em] flex gap-3 items-center">
+                    <span>
+                        {track.release.name}, Tr. {track.order}
+                    </span>
+                    <Diamond filled={false} size={3} />
+                    <span>{toRomanNumeral(track.release.year)}</span>
+                    {track.motifs.some((m) => m.origin) && (
+                        <Fragment>
+                            <Diamond filled={false} size={3} />
+                            <span>
+                                Origin of:{" "}
+                                <Link
+                                    /* @ts-expect-error yay tanstack router type safety. boo cause i can't give it nice strings. */
+                                    to={`/motif/${track.motifs.find((m) => m.origin)?.motifSlug}`}
+                                    className="hover:text-accent text-text transition-colors"
+                                >
+                                    {
+                                        track.motifs.find((m) => m.origin)
+                                            ?.motif.name
+                                    }
+                                </Link>
+                            </span>
+                        </Fragment>
+                    )}
+                </div>
+            </section>
         </PageWrapper>
     );
 }
