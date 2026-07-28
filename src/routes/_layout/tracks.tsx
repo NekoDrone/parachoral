@@ -120,7 +120,10 @@ const TracksSectionWrapper = ({
                     throw new Error(release.error);
 
                 return (
-                    <AnimatePresence initial={false}>
+                    <AnimatePresence
+                        initial={false}
+                        key={release.ok ? release.value.slug : i}
+                    >
                         {tracks.length !== 0 ? (
                             <ByRelease
                                 release={
@@ -134,7 +137,6 @@ const TracksSectionWrapper = ({
                                         }
                                 }
                                 tracks={tracks}
-                                key={release.ok ? release.value.slug : i}
                             />
                         ) : (
                             <></>
@@ -143,18 +145,26 @@ const TracksSectionWrapper = ({
                 );
             });
         case SortStrategy.COMPOSER:
-            break;
+            return (
+                <p key={sortStrategy}>
+                    Pardon our dust. We're not done building this yet!
+                </p>
+            );
         case SortStrategy.TITLE:
-            break;
+            return (
+                <p key={sortStrategy}>
+                    Pardon our dust. We're not done building this yet!
+                </p>
+            );
         case SortStrategy.DATE:
-            break;
+            return (
+                <p key={sortStrategy}>
+                    Pardon our dust. We're not done building this yet!
+                </p>
+            );
         default:
             throw new Error(
                 "Provided SortStrategy went to default case in switch statemenet. Did you forget to handle the case?",
             );
     }
-
-    throw new Error(
-        "Provided SortStrategy did not correspond to a valid strategy.",
-    );
 };
