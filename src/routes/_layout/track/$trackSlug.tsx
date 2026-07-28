@@ -86,18 +86,18 @@ function RouteComponent() {
                 <div className="italic text-subtext-1 mt-3 flex gap-2 tracking-wide text-[16px] font-light">
                     {track.composers.map((c, i) =>
                         i === track.composers.length - 1 ? (
-                            <span>{c}</span>
+                            <span key={c}>{c}</span>
                         ) : (
-                            <>
+                            <Fragment key={c}>
                                 <span>{c}</span>
                                 <span>·</span>
-                            </>
+                            </Fragment>
                         ),
                     )}
                 </div>
             </section>
             <RuleMark width={600} className="mx-auto" />
-            <section className="pt-8 max-w-[1080px] flex flex-col items-center">
+            <section className="pt-8 max-w-[1080px] flex flex-col items-center gap-6">
                 <div className="font-sans font-light text-[11px] text-subtext-1 uppercase tracking-[0.24em] flex gap-3 items-center">
                     <span>
                         {track.release.name}, Tr. {track.order}
@@ -123,6 +123,9 @@ function RouteComponent() {
                         </Fragment>
                     )}
                 </div>
+                {track.description && (
+                    <p className="text-lg text-wrap max-w-120 text-center">{track.description}</p>
+                )}
             </section>
         </PageWrapper>
     );
