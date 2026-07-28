@@ -12,7 +12,7 @@ export const ByRelease = ({
     tracks: Array<(typeof tracksParsed)[number]>;
 }) => {
     const tracksSorted = tracks.toSorted(
-        (a, b) => a.albums[0].track - b.albums[0].track,
+        (a, b) => a.order - b.order,
     );
     const releaseCardinality = Number.parseInt(release.slug.split("_")[0]);
     const tracksWithOrigins = tracksSorted.filter((t) =>
