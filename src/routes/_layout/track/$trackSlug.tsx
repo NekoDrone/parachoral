@@ -2,9 +2,15 @@ import { Diamond } from "#/components/misc/Diamond";
 import { RuleMark } from "#/components/misc/RuleMark";
 import { Breadcrumb } from "#/components/nav/Breadcrumb";
 import { PageWrapper } from "#/components/page/PageWrapper";
+import { TrackTimeline } from "#/components/tracks/TrackTimeline";
 import { getTrackBySlug } from "#/lib/data/get-track-by-slug";
+import { useAtmosphereColor } from "#/lib/hooks/useAtmosphere";
 import { tracksMap } from "#/lib/load";
 import { toRomanNumeral } from "#/lib/utils";
+import {
+    DEFAULT_ATMOSPHERE_COLOR,
+    RELEASE_ATMORPHSERE_COLOR,
+} from "#/lib/utils/color";
 import { Link, createFileRoute, notFound } from "@tanstack/react-router";
 import { Fragment } from "react/jsx-runtime";
 
@@ -62,6 +68,9 @@ function RouteComponent() {
     const track = Route.useLoaderData();
     const { release } = track;
     const releaseCardinality = Number.parseInt(release.slug.split("_")[0]);
+    const atmosphereColor =
+        RELEASE_ATMORPHSERE_COLOR[release.slug] ?? DEFAULT_ATMOSPHERE_COLOR;
+    useAtmosphereColor(atmosphereColor);
 
     return (
         <PageWrapper variant="half">
@@ -135,6 +144,7 @@ function RouteComponent() {
                     </p>
                 )}
             </section>
+            <TrackTimeline />
         </PageWrapper>
     );
 }

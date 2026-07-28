@@ -1,6 +1,11 @@
 /** `--color-haze` at 13% — the resting tint of the top atmosphere. */
 export const DEFAULT_ATMOSPHERE_COLOR = "rgba(97, 126, 180, 0.13)";
 
+export const RELEASE_ATMORPHSERE_COLOR: Record<string, string> = {
+    "0_music-of-the-spheres": "#4d140145",
+    "1_d1-vanilla": "#617eb421",
+} as const;
+
 export const isRgbColor = (value: string) => /^rgba?\(/i.test(value.trim());
 
 export const hexToRgba = (hex: string, opacity?: number): string => {
