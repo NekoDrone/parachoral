@@ -42,7 +42,6 @@ export const Breadcrumb = () => {
                 .map((p) => {
                     const text = PathsToCrumb[p] ?? "";
                     if (p === "track") {
-                        console.log(p);
                         return text;
                     }
                     return text;
