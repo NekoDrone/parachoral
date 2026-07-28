@@ -29,7 +29,7 @@ function Home() {
                     sorrow, anger, fear, knowledge, and hope.
                 </p>
                 <p className="mt-5 text-[17px] uppercase tracking-widest indent-[0.42em] text-accent">
-                   Ex Una Voce, Chorus 
+                    Ex Una Voce, Chorus
                 </p>
             </section>
         </PageWrapper>

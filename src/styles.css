@@ -64,19 +64,57 @@
     }
 }
 
+/* atmosphere
+ * Registered so the browser can interpolate it: `background-image` is a
+ * discrete property, so a gradient colour can only be transitioned through a
+ * custom property typed as <color>. Browsers without @property support simply
+ * snap to the new colour instead of easing.
+ */
+@property --atmosphere-color {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: transparent;
+}
+
+.atmosphere {
+    transition: --atmosphere-color 400ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .atmosphere {
+        transition: none;
+    }
+}
+
 /* view transitions */
-@keyframes slide-in-right { from { transform: translateX(100%); } }
-@keyframes slide-out-left { to { transform: translateX(-30%); opacity: 0; } }
+@keyframes slide-in-right {
+    from {
+        transform: translateX(100%);
+    }
+}
+@keyframes slide-out-left {
+    to {
+        transform: translateX(-30%);
+        opacity: 0;
+    }
+}
 
 html:active-view-transition-type(slide-left) {
-  &::view-transition-old(root) { animation: 220ms ease both slide-out-left; }
-  &::view-transition-new(root) { animation: 220ms ease both slide-in-right; }
+    &::view-transition-old(root) {
+        animation: 220ms ease both slide-out-left;
+    }
+    &::view-transition-new(root) {
+        animation: 220ms ease both slide-in-right;
+    }
 }
 html:active-view-transition-type(slide-right) {
-  &::view-transition-old(root) { animation: 220ms ease both slide-out-right; }
-  &::view-transition-new(root) { animation: 220ms ease both slide-in-left; }
+    &::view-transition-old(root) {
+        animation: 220ms ease both slide-out-right;
+    }
+    &::view-transition-new(root) {
+        animation: 220ms ease both slide-in-left;
+    }
 }
-
 
 * {
     box-sizing: border-box;

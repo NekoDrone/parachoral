@@ -1,4 +1,9 @@
-import { hexToRgba, isRgbColor } from "#/lib/utils/color";
+import {
+    DEFAULT_ATMOSPHERE_COLOR,
+    hexToRgba,
+    isRgbColor,
+} from "#/lib/utils/color";
+import type { CSSProperties } from "react";
 
 const resolveColor = (color: string, opacity?: number) =>
     isRgbColor(color) ? color : hexToRgba(color, opacity);
@@ -10,7 +15,7 @@ const edgeDefaults = {
 
 export const Atmosphere = ({
     variant = "top",
-    color = "rgba(97, 126, 180, 0.13)",
+    color = DEFAULT_ATMOSPHERE_COLOR,
     opacity,
     size = "900px 480px",
     position,
@@ -42,11 +47,14 @@ export const Atmosphere = ({
     return (
         <div
             aria-hidden
-            className={`pointer-events-none ${positioningClass} ${className}`}
-            style={{
-                ...(variant === "bottom" ? { height: resolvedHeight } : {}),
-                backgroundImage: `radial-gradient(${size} at ${resolvedPosition}, ${resolved}, transparent ${fade})`,
-            }}
+            className={`atmosphere pointer-events-none ${positioningClass} ${className}`}
+            style={
+                {
+                    ...(variant === "bottom" ? { height: resolvedHeight } : {}),
+                    "--atmosphere-color": resolved,
+                    backgroundImage: `radial-gradient(${size} at ${resolvedPosition}, var(--atmosphere-color), transparent ${fade})`,
+                } as CSSProperties
+            }
         />
     );
 };
