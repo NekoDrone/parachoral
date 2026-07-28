@@ -3,14 +3,16 @@ import { motion } from "motion/react";
 export const Diamond = ({
     filled = true,
     size = 7,
+    className,
 }: {
     filled?: boolean;
     size?: number;
+    className?: string;
 }) => {
     return (
         <span
             aria-hidden="true"
-            className="relative inline-block align-middle border border-solid border-accent rounded-[1px]"
+            className={"relative inline-block align-middle border border-solid border-accent rounded-[1px] " + className}
             style={{ width: size, height: size, rotate: "45deg" }}
         >
             <motion.span

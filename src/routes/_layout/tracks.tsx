@@ -2,14 +2,15 @@ import { CountUp } from "#/components/animated/CountUp";
 import { Breadcrumb } from "#/components/nav/Breadcrumb";
 import { PageWrapper } from "#/components/page/PageWrapper";
 import { SortStrategy, Toolbar } from "#/components/page/Toolbar";
+import { TrackSpine } from "#/components/tracks/TrackSpine";
 import { ByRelease } from "#/components/tracks/TracksSection/ByRelease";
-import { getReleaseBySlug } from "#/lib/data/get-release-by-slug";
+import { getReleaseSections } from "#/lib/data/get-release-sections";
+import type { ReleaseSection } from "#/lib/data/get-release-sections";
+import { useAtmosphereColor } from "#/lib/hooks/useAtmosphere";
 import { tracksParsed } from "#/lib/load";
-import { sortTracksByRelease } from "#/lib/utils/track";
 import { createFileRoute } from "@tanstack/react-router";
 import { AnimatePresence } from "motion/react";
-import { useState } from "react";
-import type { Dispatch, SetStateAction } from "react";
+import { useMemo, useState } from "react";
 
 export const Route = createFileRoute("/_layout/tracks")({
     component: RouteComponent,
@@ -21,7 +22,17 @@ function RouteComponent() {
     const [sortStrategy, setSortStrategy] = useState<SortStrategy>(
         SortStrategy.RELEASE,
     );
-    const [tracksCount, setTracksCount] = useState(tracksParsed.length);
+    useAtmosphereColor("#c7a65b18");
+
+    // One derivation, shared by the spine and the list so they cannot drift.
+    const sections = useMemo(
+        () => getReleaseSections({ originsOnly }),
+        [originsOnly],
+    );
+    const tracksCount = sections.reduce(
+        (acc, { tracks }) => acc + tracks.length,
+        0,
+    );
 
     return (
         <PageWrapper variant="half">
@@ -59,7 +70,11 @@ function RouteComponent() {
             </section>
 
             <div className="grid grid-cols-[54px_1fr] gap-8 pt-7">
-                <nav className="sticky top-27 self-start flex flex-col gap-0.5 border-l border-solid border-text-text/13"></nav>
+                {sortStrategy === SortStrategy.RELEASE ? (
+                    <TrackSpine sections={sections} />
+                ) : (
+                    <div />
+                )}
                 <div>
                     <div
                         className="text-[10px] tracking-[0.28em] uppercase pt-0 pr-[10px] pb-[12px] pl-1 border-b border-text/13 font-mono text-subtext-0 grid grid-cols-[86px_1.5fr_1.25fr_1.05fr_108px_26px] gap-4 items-baseline mb-6"
@@ -73,10 +88,8 @@ function RouteComponent() {
                         <span />
                     </div>
                     <TracksSectionWrapper
-                        query={query}
-                        originsOnly={originsOnly}
+                        sections={sections}
                         sortStrategy={sortStrategy}
-                        setTracksCount={setTracksCount}
                     />
                 </div>
             </div>
@@ -85,65 +98,25 @@ function RouteComponent() {
 }
 
 const TracksSectionWrapper = ({
-    query,
-    originsOnly,
+    sections,
     sortStrategy,
-    setTracksCount,
 }: {
-    query: string;
-    originsOnly: boolean;
+    sections: Array<ReleaseSection>;
     sortStrategy: SortStrategy;
-    setTracksCount: Dispatch<SetStateAction<number>>;
 }) => {
     switch (sortStrategy) {
         case SortStrategy.RELEASE:
-            // eslint-disable-next-line no-case-declarations
-            const tracksByRelease = sortTracksByRelease(tracksParsed);
-
-            if (originsOnly) {
-                tracksByRelease.forEach(
-                    ([slug, ts], i) =>
-                    (tracksByRelease[i] = [
-                        slug,
-                        ts.filter((t) => t.motifs.some((m) => m.origin)),
-                    ]),
-                );
-            }
-
-            setTracksCount(
-                tracksByRelease.reduce((acc, [_, ts]) => (acc += ts.length), 0),
+            return (
+                <AnimatePresence initial={false}>
+                    {sections.map(({ release, tracks }) => (
+                        <ByRelease
+                            key={release.slug}
+                            release={release}
+                            tracks={tracks}
+                        />
+                    ))}
+                </AnimatePresence>
             );
-
-            return tracksByRelease.map(([releaseSlug, tracks], i) => {
-                const release = getReleaseBySlug(releaseSlug);
-                if (releaseSlug !== "unreleased" && !release.ok)
-                    throw new Error(release.error);
-
-                return (
-                    <AnimatePresence
-                        initial={false}
-                        key={release.ok ? release.value.slug : i}
-                    >
-                        {tracks.length !== 0 ? (
-                            <ByRelease
-                                release={
-                                    release.ok
-                                        ? release.value
-                                        : {
-                                            slug: "unreleased",
-                                            name: "Unreleased",
-                                            year: 0,
-                                            shorthand: "UNRL",
-                                        }
-                                }
-                                tracks={tracks}
-                            />
-                        ) : (
-                            <></>
-                        )}
-                    </AnimatePresence>
-                );
-            });
         case SortStrategy.COMPOSER:
             return (
                 <p key={sortStrategy}>
