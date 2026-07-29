@@ -75,7 +75,7 @@ function RouteComponent() {
     return (
         <PageWrapper variant="half">
             <Breadcrumb />
-            <section className="pt-12 max-w-[1080px] flex flex-col items-center">
+            <section className="pt-20 max-w-[1080px] flex flex-col items-center">
                 <div className="font-sans font-light text-[11px] text-subtext-0 uppercase tracking-[0.24em] flex gap-4 items-center">
                     <span>
                         {releaseCardinality === 0
