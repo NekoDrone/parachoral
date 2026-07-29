@@ -107,7 +107,7 @@ const TracksSectionWrapper = ({
     switch (sortStrategy) {
         case SortStrategy.RELEASE:
             return (
-                <AnimatePresence initial={false}>
+                <AnimatePresence initial={true}>
                     {sections.map(({ release, tracks }) => (
                         <ByRelease
                             key={release.slug}

@@ -23,9 +23,10 @@ export const ByRelease = ({
             tabIndex={-1}
             className="pb-4 scroll-mt-27 outline-none"
             initial={{ opacity: 0, y: -24 }}
-            animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -24 }}
-            transition={{ duration: 0.1, ease: "easeOut" }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
         >
             <header className="flex align-baseline items-center gap-4 mb-2">
                 <span className="text-accent font-mono w-16 shrink-0 text-[13px]">
