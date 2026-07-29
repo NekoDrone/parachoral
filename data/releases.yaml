@@ -8,3 +8,19 @@
   name: Destiny
   year: 2014
   shorthand: DTY1
+- slug: 2_the-dark-below
+  name: The Dark Below
+  year: 2014
+  shorthand: TDBL
+- slug: 3_house-of-wolves
+  name: House of Wolves
+  year: 2014
+  shorthand: HWLV
+- slug: 4_the-taken-king
+  name: The Taken King
+  year: 2015
+  shorthand: ORYX
+- slug: 5_rise-of-iron
+  name: Rise of Iron
+  year: 2016
+  shorthand: IRON

@@ -14,9 +14,11 @@
 /** Proposed additions to /data/releases.yaml. Merge them in by hand. */
 export const releases = [
     { slug: "0_music-of-the-spheres", name: "Music of the Spheres", year: 2014, shorthand: "MOTS" },
-    { slug: "destiny", name: "Destiny", year: 2014, shorthand: "DTY1" }, // TODO: ordinal prefix, name, shorthand
-    { slug: "the-taken-king", name: "The Taken King", year: 2015, shorthand: "DTTK" }, // TODO: ordinal prefix, name, shorthand
-    { slug: "rise-of-iron", name: "Rise of Iron", year: 2016, shorthand: "DROI" }, // TODO: ordinal prefix, name, shorthand
+    { slug: "1_d1-vanilla", name: "Destiny", year: 2014, shorthand: "DTY1" },
+    { slug: "2_the-dark-below", name: "The Dark Below", year: 2014, shorthand: "TDBL" },
+    { slug: "3_house-of-wolves", name: "House of Wolves", year: 2014, shorthand: "HWLV" },
+    { slug: "4_the-taken-king", name: "The Taken King", year: 2015, shorthand: "ORYX" },
+    { slug: "5_rise-of-iron", name: "Rise of Iron", year: 2016, shorthand: "SIVA" },
     { slug: "the-dawning", name: "The Dawning", year: 2016, shorthand: "TD__" }, // TODO: ordinal prefix, name, shorthand
     { slug: "destiny-2", name: "Destiny 2", year: 2017, shorthand: "DTY2" }, // TODO: ordinal prefix, name, shorthand
     { slug: "curse-of-osiris-warmind", name: "Curse of Osiris/Warmind", year: 2018, shorthand: "COOW" }, // TODO: ordinal prefix, name, shorthand
@@ -42,23 +44,23 @@ export const releases = [
 
 export const albums = {
     "Music of the Spheres": {
-        albumSlug: "music-of-the-spheres", // already in /data/albums
+        albumSlug: "music-of-the-spheres",
         releaseSlug: "0_music-of-the-spheres",
     },
     "Destiny": {
-        albumSlug: "destiny",
-        releaseSlug: "destiny", // TODO: confirm
-        releasedAt: "2014-01-01", // TODO: real date, export only gives Year
+        albumSlug: "destiny-ost",
+        releaseSlug: "1_d1-vanilla",
+        releasedAt: "2014-09-26",
     },
     "Destiny: The Taken King": {
-        albumSlug: "destiny-the-taken-king",
-        releaseSlug: "the-taken-king", // TODO: confirm
-        releasedAt: "2015-01-01", // TODO: real date, export only gives Year
+        albumSlug: "the-taken-king",
+        releaseSlug: "4_the-taken-king",
+        releasedAt: "2015-09-15",
     },
     "Destiny: Rise of Iron": {
-        albumSlug: "destiny-rise-of-iron",
-        releaseSlug: "rise-of-iron", // TODO: confirm
-        releasedAt: "2016-01-01", // TODO: real date, export only gives Year
+        albumSlug: "rise-of-iron",
+        releaseSlug: "5_rise-of-iron",
+        releasedAt: "2016-09-16",
     },
     "The Dawning": {
         albumSlug: "the-dawning",
