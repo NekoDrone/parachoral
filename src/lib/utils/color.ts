@@ -7,7 +7,7 @@ export const RELEASE_ATMORPHSERE_COLOR: Record<string, string> = {
     "2_the-dark-below": "#9bffbb27",
     "3_house-of-wolves": "#09b0ff29",
     "4_the-taken-king": "#b024582c",
-    "5_rise-of-iron": "",
+    "5_rise-of-iron": "#dcc45d29",
 } as const;
 
 export const isRgbColor = (value: string) => /^rgba?\(/i.test(value.trim());

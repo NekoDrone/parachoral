@@ -53,6 +53,7 @@ export const Footer = () => {
                         <p className="mt-3 text-sm italic text-subtext-0">
                             Inspired by the{" "}
                             <a
+                                href="https://eorzeasongbook.com/"
                                 target="_blank"
                                 rel="noreferrer"
                                 className="group text-subtext-0 transition-colors duration-200 hover:text-accent cursor-pointer underline"
