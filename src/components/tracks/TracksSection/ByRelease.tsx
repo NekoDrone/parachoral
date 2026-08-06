@@ -32,6 +32,7 @@ export const ByRelease = ({
                 <span className="text-accent font-mono w-16 shrink-0 text-[13px]">
                     {releaseNumeralLabel(release)}
                 </span>
+                {/* TODO: Resolve full release object, then change this h2 to a link component that brings you to the release page. */}
                 <h2 className="font-medium text-2xl m-0">{release.name}</h2>
                 <span className="text-subtext-1">{release.year}</span>
                 <span className="flex-1 h-px bg-overlay-0" />
