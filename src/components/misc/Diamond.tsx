@@ -12,7 +12,10 @@ export const Diamond = ({
     return (
         <span
             aria-hidden="true"
-            className={"relative inline-block align-middle border border-solid border-accent rounded-[1px] " + className}
+            className={
+                "relative inline-block align-middle border border-solid border-accent rounded-[1px] " +
+                className
+            }
             style={{ width: size, height: size, rotate: "45deg" }}
         >
             <motion.span
