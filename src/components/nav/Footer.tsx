@@ -111,8 +111,8 @@ export const Footer = () => {
                     <div className="max-w-[56ch] space-y-2.5">
                         <p className="text-sm leading-relaxed text-subtext-1">
                             All music © Bungie, Inc. Parachoral is an unofficial
-                            fan work: entries link to official releases and the
-                            Destiny Music Archive, and no full recordings are
+                            fan work. Entries link to official releases and the
+                            Destiny Music Archive; no full recordings are
                             hosted here.
                         </p>
                         <p className="font-sans text-[10px] uppercase tracking-[0.18em] text-subtext-0">

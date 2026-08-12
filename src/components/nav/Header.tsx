@@ -83,8 +83,7 @@ export const Header = () => {
                         >
                             {item.dropdownItems.map((dropdownItem) => (
                                 <Link
-                                    to={dropdownItem.label}
-                                    href={dropdownItem.href}
+                                    to={dropdownItem.href}
                                     className="font-sans text-[11px] font-light uppercase tracking-[0.28em] text-subtext-1 transition-colors duration-200 hover:text-accent"
                                     onClick={() => setShowDropdown(false)}
                                     key={dropdownItem.label}
