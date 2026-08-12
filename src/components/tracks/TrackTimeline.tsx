@@ -1,30 +1,31 @@
 import { SectionHead } from "#/components/misc/SectionHead";
 import { Tooltip } from "#/components/misc/Tooltip";
-import { numToDuration } from "#/lib/utils";
+import type { TrackResolved } from "#/lib/types/data/track";
+import { durationToNum, numToDuration } from "#/lib/utils";
 import type { CSSProperties } from "react";
-
-const testStuff: Array<{
-    label: string;
-    timestamp: { start: number; end?: number };
-    origin?: boolean;
-}> = [
-        { label: "The Dawning", timestamp: { start: 0, end: 16 }, origin: true },
-        { label: "The Guardian", timestamp: { start: 52 } },
-        {
-            label: "Be Brave",
-            timestamp: { start: 84, end: 107 },
-        },
-        { label: "The Dawning", timestamp: { start: 132, end: 151 } },
-    ];
-
-const DURATION = 222;
 
 const fmt = numToDuration;
 
-export const TrackTimeline = () => {
+export const TrackTimeline = ({ track }: { track: TrackResolved }) => {
+    const { motifs, duration: durationStr } = track;
+    const duration = durationToNum(durationStr);
     const minutes = [];
-    for (let t = 0; t < DURATION; t += 60) minutes.push(t);
-    minutes.push(DURATION);
+    for (let t = 0; t < duration; t += 60) minutes.push(t);
+    minutes.push(duration);
+
+    // if no motif, guarantee rendering track line
+    if (motifs.length === 0)
+        motifs.push({
+            motif: {
+                name: track.title,
+                aka: [],
+                description: "Placeholder for track title",
+                related: [],
+            },
+            origin: false,
+            at: [{ start: 0, end: undefined }],
+            motifSlug: "",
+        });
 
     return (
         <section className="px-0 pt-[56px] pb-[8px] flex flex-col gap-2 items-center justify-center">
@@ -45,15 +46,15 @@ export const TrackTimeline = () => {
                             <span
                                 key={t}
                                 className="absolute inset-y-0 w-px bg-overlay-0"
-                                style={{ left: `${(t / DURATION) * 100}%` }}
+                                style={{ left: `${(t / duration) * 100}%` }}
                             />
                         ))}
                     </div>
 
                     <div className="grid grid-cols-[var(--label-w)_1fr] gap-x-(--gap) w-full">
-                        {testStuff.map((m) => (
+                        {motifs.map((m) => (
                             <div
-                                key={m.label}
+                                key={m.motif.name}
                                 className={
                                     "grid grid-cols-subgrid col-span-2 gap-6 h-12 items-center" +
                                     (m.origin ? " relative isolate z-10" : "")
@@ -66,14 +67,16 @@ export const TrackTimeline = () => {
                                     />
                                 )}
                                 <span className="font-sans uppercase tracking-[0.2em] text-subtext-1 text-xs whitespace-nowrap">
-                                    {m.label}
+                                    {m.motif.name}
                                 </span>
                                 <div className="relative flex items-center border-l border-overlay-0 h-full">
                                     <span className="h-px w-full bg-overlay-0" />
-                                    <TrackNodeDiamond
-                                        timestamp={m.timestamp}
-                                        duration={DURATION}
-                                    />
+                                    {m.at.map((t) => (
+                                        <TrackNodeDiamond
+                                            timestamp={t}
+                                            duration={duration}
+                                        />
+                                    ))}
                                 </div>
                             </div>
                         ))}
@@ -86,7 +89,7 @@ export const TrackTimeline = () => {
                             key={t}
                             className="absolute top-2 font-mono text-[10px] tabular-nums text-subtext-0"
                             style={{
-                                left: `${(t / DURATION) * 100}%`,
+                                left: `${(t / duration) * 100}%`,
                                 transform:
                                     i === 0
                                         ? "none"

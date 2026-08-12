@@ -6,7 +6,7 @@ import { TrackTimeline } from "#/components/tracks/TrackTimeline";
 import { getTrackBySlug } from "#/lib/data/get-track-by-slug";
 import { useAtmosphereColor } from "#/lib/hooks/useAtmosphere";
 import { tracksMap } from "#/lib/load";
-import { toRomanNumeral } from "#/lib/utils";
+import { durationToNum, toRomanNumeral } from "#/lib/utils";
 import {
     DEFAULT_ATMOSPHERE_COLOR,
     RELEASE_ATMORPHSERE_COLOR,
@@ -113,12 +113,10 @@ function RouteComponent() {
                     </span>
                     <Diamond filled={false} size={3} />
                     <span>{toRomanNumeral(track.release.year)}</span>
-                    {track.runtime && (
-                        <>
-                            <Diamond filled={false} size={3} />
-                            <span>{track.runtime}</span>
-                        </>
-                    )}
+                    <>
+                        <Diamond filled={false} size={3} />
+                        <span>{track.duration}</span>
+                    </>
                     {track.motifs.some((m) => m.origin) && (
                         <Fragment>
                             <Diamond filled={false} size={3} />
@@ -144,7 +142,10 @@ function RouteComponent() {
                     </p>
                 )}
             </section>
-            <TrackTimeline />
+            {/* FIXME: Make this work */}
+            <TrackTimeline
+                track={track}
+            />
         </PageWrapper>
     );
 }

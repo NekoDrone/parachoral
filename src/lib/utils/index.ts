@@ -48,3 +48,8 @@ export const toRomanNumeral = (num: number): string => {
 
 export const numToDuration = (s: number) =>
     `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+
+export const durationToNum = (d: string) => {
+      const [m, s] = d.split(":").map(Number);
+      return m * 60 + s;
+};
