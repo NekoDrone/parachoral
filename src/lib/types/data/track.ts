@@ -37,7 +37,7 @@ export const Track = z.object({
     composers: z.array(z.string()).min(1),
     description: z.string().optional(),
     order: z.number().min(1),
-    runtime: z.templateLiteral([z.string(), ":", z.string()]).optional(),
+    duration: z.templateLiteral([z.string(), ":", z.string()]),
     links: Sources.optional(),
     albums: z
         .array(
