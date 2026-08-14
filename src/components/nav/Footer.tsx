@@ -19,7 +19,8 @@ const ELSEWHERE_LINKS = [
         href: "https://www.youtube.com/@destiny_music_archive",
     },
     { label: "Bungie", href: "https://www.bungie.net" },
-    // TODO: point at the real repository
+    { label: "Bluesky", href: "https://bsky.app/profile/parachoral.fm" },
+    { label: "Twitter (X)", href: "https://x.com/ParachoralFM" },
     {
         label: "Source on GitHub",
         href: "https://github.com/NekoDrone/parachoral",
@@ -112,8 +113,8 @@ export const Footer = () => {
                         <p className="text-sm leading-relaxed text-subtext-1">
                             All music © Bungie, Inc. Parachoral is an unofficial
                             fan work. Entries link to official releases and the
-                            Destiny Music Archive; no full recordings are
-                            hosted here.
+                            Destiny Music Archive; no full recordings are hosted
+                            here.
                         </p>
                         <p className="font-sans text-[10px] uppercase tracking-[0.18em] text-subtext-0">
                             Per Audacia ad Astra
