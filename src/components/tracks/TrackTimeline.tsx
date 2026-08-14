@@ -2,6 +2,7 @@ import { SectionHead } from "#/components/misc/SectionHead";
 import { Tooltip } from "#/components/misc/Tooltip";
 import type { TrackResolved } from "#/lib/types/data/track";
 import { durationToNum, numToDuration } from "#/lib/utils";
+import { Link } from "@tanstack/react-router";
 import type { CSSProperties } from "react";
 
 const fmt = numToDuration;
@@ -66,9 +67,22 @@ export const TrackTimeline = ({ track }: { track: TrackResolved }) => {
                                         className="pointer-events-none absolute -inset-2 -z-10 col-span-2 bg-radial-[ellipse_80%_40%_at_50%_50%] from-accent/5.5 to-transparent to-85%"
                                     />
                                 )}
-                                <span className="font-sans uppercase tracking-[0.2em] text-subtext-1 text-xs whitespace-nowrap">
-                                    {m.motif.name}
-                                </span>
+                                <Tooltip
+                                    tooltip={
+                                        <span className="whitespace-nowrap font-mono text-xs text-subtext-1">
+                                            {m.motif.description}
+                                        </span>
+                                    }
+                                    showCaret={false}
+                                    tooltipClassName="translate-y-1/2 bg-surface1 py-1 px-1 border-overlay-0 border-2 mb-4 -translate-x-1/4"
+                                >
+                                    <Link
+                                        className="font-sans uppercase tracking-[0.2em] text-subtext-1 text-xs whitespace-nowrap hover:text-accent transition-colors"
+                                        to={`/motif/${m.motifSlug}`}
+                                    >
+                                        {m.motif.name}
+                                    </Link>
+                                </Tooltip>
                                 <div className="relative flex items-center border-l border-overlay-0 h-full">
                                     <span className="h-px w-full bg-overlay-0" />
                                     {m.at.map((t) => (
@@ -126,13 +140,13 @@ const TrackNodeDiamond = ({
         >
             <Tooltip
                 tooltip={
-                    <span className="whitespace-nowrap">
+                    <span className="whitespace-nowrap font-mono text-xs text-subtext-1">
                         {numToDuration(start) +
                             (end ? ` – ${numToDuration(end)}` : "")}
                     </span>
                 }
                 showCaret={false}
-                tooltipClassName="translate-y-1/2 bg-surface1 py-1 px-1 border-overlay-0 border-2 mb-2"
+                tooltipClassName="translate-y-1/2 bg-surface1 py-1 px-1 border-overlay-0 border-2 mb-4"
             >
                 {end !== undefined && (
                     <span className="absolute inset-x-1 top-1/2 h-px -translate-y-1/2 bg-accent/60" />

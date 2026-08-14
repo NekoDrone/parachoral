@@ -142,7 +142,6 @@ function RouteComponent() {
                     </p>
                 )}
             </section>
-            {/* FIXME: Make this work */}
             <TrackTimeline
                 track={track}
             />
