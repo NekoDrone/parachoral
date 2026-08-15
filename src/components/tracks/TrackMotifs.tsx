@@ -31,7 +31,7 @@ const Motif = ({ motif }: { motif: TrackMotifResolved }) => {
 
     return (
         <motion.div
-            className="relative pl-4 py-2 hover:bg-surface0 transition-colors w-[98%] grid grid-cols-[20px_1fr]"
+            className="relative pl-4 py-4 hover:bg-surface0 transition-colors w-[98%] grid grid-cols-[22px_1fr]"
             initial="rest"
             whileHover="hover"
             animate="rest"
@@ -54,7 +54,7 @@ const Motif = ({ motif }: { motif: TrackMotifResolved }) => {
                         />
                     )}
                     <Link
-                        className="text-2xl hover:text-accent transition-colors"
+                        className="text-2xl hover:text-accent transition-colors pb-1"
                         to="/motif/$motifSlug"
                         params={{ motifSlug: motif.motifSlug }}
                     >
@@ -88,7 +88,7 @@ const Motif = ({ motif }: { motif: TrackMotifResolved }) => {
                     <span>{motif.motif.description}</span>
                 </div>
                 <Link
-                    className="uppercase font-sans tracking-[0.2em] text-[9px] text-subtext-0 py-2 hover:text-accent flex gap-1 items-center"
+                    className="uppercase font-sans tracking-[0.2em] text-[9px] text-subtext-0 pb-1 pt-3 hover:text-accent flex gap-1 items-center"
                     to="/motif/$motifSlug"
                     params={{ motifSlug: motif.motifSlug }}
                 >
