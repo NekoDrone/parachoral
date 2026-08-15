@@ -116,6 +116,8 @@ export const TrackTimeline = ({ track }: { track: TrackResolved }) => {
                         </span>
                     ))}
                 </div>
+
+                <div className="pt-4 text-end text-xs text-subtext-0 tracking-wider">hover over the nodes to see the precise timestamp a motif occurs in</div>
             </div>
         </section>
     );
