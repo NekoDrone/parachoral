@@ -124,8 +124,12 @@ function RouteComponent() {
                             <span>
                                 Origin of:{" "}
                                 <Link
-                                    /* @ts-expect-error yay tanstack router type safety. boo cause i can't give it nice strings. */
-                                    to={`/motif/${track.motifs.find((m) => m.origin)?.motifSlug}`}
+                                    to="/motif/$motifSlug"
+                                    params={{
+                                        motifSlug:
+                                            track.motifs.find((m) => m.origin)
+                                                ?.motifSlug ?? "",
+                                    }}
                                     className="hover:text-accent text-text transition-colors"
                                 >
                                     {
@@ -143,7 +147,7 @@ function RouteComponent() {
                     </p>
                 )}
             </section>
-            <TrackTimeline track={track} />
+            <TrackTimeline />
             <TrackMotifActivitiesWrapper />
         </PageWrapper>
     );

@@ -1,8 +1,16 @@
 import { toRomanNumeral } from "#/lib/utils";
 
-export const SectionHead = ({ label, num }: { label: string; num: number }) => {
+export const SectionHead = ({
+    label,
+    num,
+    className = "mb-8 w-full",
+}: {
+    label: string;
+    num: number;
+    className?: string;
+}) => {
     return (
-        <div className="flex items-center gap-[20px] mb-[34px] w-full">
+        <div className={`flex items-center gap-[20px] ${className}`}>
             <span className="font-sans font-normal text-[11px] tracking-[0.36em] uppercase text-accent whitespace-nowrap">
                 {label}
             </span>

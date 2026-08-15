@@ -1,13 +1,14 @@
 import { SectionHead } from "#/components/misc/SectionHead";
 import { Tooltip } from "#/components/misc/Tooltip";
-import type { TrackResolved } from "#/lib/types/data/track";
 import { durationToNum, numToDuration } from "#/lib/utils";
+import { Route } from "#/routes/_layout/track/$trackSlug";
 import { Link } from "@tanstack/react-router";
 import type { CSSProperties } from "react";
 
 const fmt = numToDuration;
 
-export const TrackTimeline = ({ track }: { track: TrackResolved }) => {
+export const TrackTimeline = () => {
+    const track = Route.useLoaderData();
     const { motifs, duration: durationStr } = track;
     const duration = durationToNum(durationStr);
     const minutes = [];
@@ -78,7 +79,8 @@ export const TrackTimeline = ({ track }: { track: TrackResolved }) => {
                                 >
                                     <Link
                                         className="font-sans uppercase tracking-[0.2em] text-subtext-1 text-xs whitespace-nowrap hover:text-accent transition-colors"
-                                        to={`/motif/${m.motifSlug}`}
+                                        to="/motif/$motifSlug"
+                                        params={{ motifSlug: m.motifSlug }}
                                     >
                                         {m.motif.name}
                                     </Link>
@@ -117,7 +119,10 @@ export const TrackTimeline = ({ track }: { track: TrackResolved }) => {
                     ))}
                 </div>
 
-                <div className="pt-4 text-end text-xs text-subtext-0 tracking-wider">hover over the nodes to see the precise timestamp a motif occurs in</div>
+                <div className="pt-4 text-end text-xs text-subtext-0 tracking-wider">
+                    hover over the nodes to see the precise timestamp a motif
+                    occurs in
+                </div>
             </div>
         </section>
     );

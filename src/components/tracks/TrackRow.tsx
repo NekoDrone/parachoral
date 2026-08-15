@@ -42,8 +42,8 @@ export const TrackRow = ({
                     </span>
                     <span className="font-serif text-[20px] leading-tight transition-colors w-64">
                         <Link
-                            // @ts-expect-error i cannot be bothered to fix this
-                            to={`/track/${track.slug}`}
+                            to="/track/$trackSlug"
+                            params={{ trackSlug: track.slug }}
                             className=" hover:text-accent transition-colors"
                         >
                             {track.title}
@@ -131,8 +131,11 @@ export const TrackRow = ({
                                                         </span>
                                                         {motifResolved.ok && (
                                                             <Link
-                                                                // @ts-expect-error same shit.
-                                                                to={`/motif/${m.motifSlug}`}
+                                                                to="/motif/$motifSlug"
+                                                                params={{
+                                                                    motifSlug:
+                                                                        m.motifSlug,
+                                                                }}
                                                                 className="font-serif text-[18px] hover:text-accent transition-colors"
                                                             >
                                                                 {
