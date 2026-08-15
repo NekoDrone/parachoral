@@ -17,6 +17,7 @@ import { Route as LayoutAlbumsRouteImport } from './routes/_layout/albums'
 import { Route as LayoutMotifsRouteImport } from './routes/_layout/motifs'
 import { Route as LayoutReleasesRouteImport } from './routes/_layout/releases'
 import { Route as LayoutTracksRouteImport } from './routes/_layout/tracks'
+import { Route as LayoutMotifMotifSlugRouteImport } from './routes/_layout/motif/$motifSlug'
 import { Route as LayoutTrackTrackSlugRouteImport } from './routes/_layout/track/$trackSlug'
 
 const LayoutRoute = LayoutRouteImport.update({
@@ -58,6 +59,11 @@ const LayoutTracksRoute = LayoutTracksRouteImport.update({
   path: '/tracks',
   getParentRoute: () => LayoutRoute,
 } as any)
+const LayoutMotifMotifSlugRoute = LayoutMotifMotifSlugRouteImport.update({
+  id: '/motif/$motifSlug',
+  path: '/motif/$motifSlug',
+  getParentRoute: () => LayoutRoute,
+} as any)
 const LayoutTrackTrackSlugRoute = LayoutTrackTrackSlugRouteImport.update({
   id: '/track/$trackSlug',
   path: '/track/$trackSlug',
@@ -72,6 +78,7 @@ export interface FileRoutesByFullPath {
   '/motifs': typeof LayoutMotifsRoute
   '/releases': typeof LayoutReleasesRoute
   '/tracks': typeof LayoutTracksRoute
+  '/motif/$motifSlug': typeof LayoutMotifMotifSlugRoute
   '/track/$trackSlug': typeof LayoutTrackTrackSlugRoute
 }
 export interface FileRoutesByTo {
@@ -82,6 +89,7 @@ export interface FileRoutesByTo {
   '/releases': typeof LayoutReleasesRoute
   '/tracks': typeof LayoutTracksRoute
   '/': typeof LayoutIndexRoute
+  '/motif/$motifSlug': typeof LayoutMotifMotifSlugRoute
   '/track/$trackSlug': typeof LayoutTrackTrackSlugRoute
 }
 export interface FileRoutesById {
@@ -94,6 +102,7 @@ export interface FileRoutesById {
   '/_layout/releases': typeof LayoutReleasesRoute
   '/_layout/tracks': typeof LayoutTracksRoute
   '/_layout/': typeof LayoutIndexRoute
+  '/_layout/motif/$motifSlug': typeof LayoutMotifMotifSlugRoute
   '/_layout/track/$trackSlug': typeof LayoutTrackTrackSlugRoute
 }
 export interface FileRouteTypes {
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/motifs'
     | '/releases'
     | '/tracks'
+    | '/motif/$motifSlug'
     | '/track/$trackSlug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -116,6 +126,7 @@ export interface FileRouteTypes {
     | '/releases'
     | '/tracks'
     | '/'
+    | '/motif/$motifSlug'
     | '/track/$trackSlug'
   id:
     | '__root__'
@@ -127,6 +138,7 @@ export interface FileRouteTypes {
     | '/_layout/releases'
     | '/_layout/tracks'
     | '/_layout/'
+    | '/_layout/motif/$motifSlug'
     | '/_layout/track/$trackSlug'
   fileRoutesById: FileRoutesById
 }
@@ -192,6 +204,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutTracksRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/motif/$motifSlug': {
+      id: '/_layout/motif/$motifSlug'
+      path: '/motif/$motifSlug'
+      fullPath: '/motif/$motifSlug'
+      preLoaderRoute: typeof LayoutMotifMotifSlugRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_layout/track/$trackSlug': {
       id: '/_layout/track/$trackSlug'
       path: '/track/$trackSlug'
@@ -210,6 +229,7 @@ interface LayoutRouteChildren {
   LayoutReleasesRoute: typeof LayoutReleasesRoute
   LayoutTracksRoute: typeof LayoutTracksRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
+  LayoutMotifMotifSlugRoute: typeof LayoutMotifMotifSlugRoute
   LayoutTrackTrackSlugRoute: typeof LayoutTrackTrackSlugRoute
 }
 
@@ -221,6 +241,7 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutReleasesRoute: LayoutReleasesRoute,
   LayoutTracksRoute: LayoutTracksRoute,
   LayoutIndexRoute: LayoutIndexRoute,
+  LayoutMotifMotifSlugRoute: LayoutMotifMotifSlugRoute,
   LayoutTrackTrackSlugRoute: LayoutTrackTrackSlugRoute,
 }
 
