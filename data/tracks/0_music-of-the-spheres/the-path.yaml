@@ -14,7 +14,7 @@ albums:
 motifs:
     - motifSlug: path
       origin: true
-      at: ["0:18-0:20", "0:42-1:12"]
+      at: ["0:18-0:20"]
       note: Steps along a cosmic trail.
     - motifSlug: traveler
       origin: false
