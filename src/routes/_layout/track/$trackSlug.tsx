@@ -2,11 +2,12 @@ import { Diamond } from "#/components/misc/Diamond";
 import { RuleMark } from "#/components/misc/RuleMark";
 import { Breadcrumb } from "#/components/nav/Breadcrumb";
 import { PageWrapper } from "#/components/page/PageWrapper";
+import { TrackMotifActivitiesWrapper } from "#/components/tracks/TrackMotifsActivitiesWrapper";
 import { TrackTimeline } from "#/components/tracks/TrackTimeline";
 import { getTrackBySlug } from "#/lib/data/get-track-by-slug";
 import { useAtmosphereColor } from "#/lib/hooks/useAtmosphere";
 import { tracksMap } from "#/lib/load";
-import { durationToNum, toRomanNumeral } from "#/lib/utils";
+import { toRomanNumeral } from "#/lib/utils";
 import {
     DEFAULT_ATMOSPHERE_COLOR,
     RELEASE_ATMORPHSERE_COLOR,
@@ -142,9 +143,8 @@ function RouteComponent() {
                     </p>
                 )}
             </section>
-            <TrackTimeline
-                track={track}
-            />
+            <TrackTimeline track={track} />
+            <TrackMotifActivitiesWrapper />
         </PageWrapper>
     );
 }
