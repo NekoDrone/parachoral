@@ -192,6 +192,7 @@ export const TrackRow = ({
                                 <a
                                     href="https://github.com/NekoDrone/parachoral"
                                     className="text-accent hover:text-text"
+                                    target="_blank"
                                 >
                                     Submit a change
                                 </a>

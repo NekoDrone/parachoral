@@ -61,6 +61,7 @@ const PlaysIn = () => {
                         Disagree?{" "}
                         <a
                             href="https://github.com/NekoDrone/parachoral"
+                            target="_blank"
                             className="text-accent hover:text-text"
                         >
                             Submit a change
@@ -81,14 +82,14 @@ const Sources = () => {
                     return (
                         <div className="flex gap-3 items-center">
                             <Diamond filled={true} size={4} />
-                            <Link
-                                to={l.url}
+                            <a
                                 href={l.url}
                                 className="hover:text-accent transition-colors text-lg flex gap-1 items-center"
+                                target="_blank"
                             >
                                 {humaniseSourceType(l.source)}
                                 <ArrowUpRightIcon size={10} />
-                            </Link>
+                            </a>
                         </div>
                     );
                 })}
