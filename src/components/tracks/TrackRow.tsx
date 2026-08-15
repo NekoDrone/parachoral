@@ -54,10 +54,11 @@ export const TrackRow = ({
                             .map((c) => c.split(" ")[c.split(" ").length - 1])
                             .join(" · ")}
                     </span>
-                    <span className="font-mono text-subtext-1 uppercase">
+                    <span className="text-[11.5px] tracking-[0.08em] overflow-hidden text-ellipsis whitespace-nowrap font-mono text-subtext-0 max-w-60">
+                        -{" "}
                         {trackMainActivityResult && trackMainActivityResult.ok
-                            ? `${trackMainActivityResult.value.name} · ${trackMainActivityResult.value.type}`
-                            : "-"}
+                            ? `${trackMainActivityResult.value.name}`
+                            : ""}
                     </span>
                 </div>
                 <div className="flex gap-6 items-center">
