@@ -13,7 +13,7 @@ export const TrackMotifs = () => {
     const track = Route.useLoaderData();
     return (
         <div>
-            <SectionHead label="The Motifs" num={2} className="w-full mb-8" />
+            <SectionHead label="The Motifs" num={2} className="w-full mb-2" />
             <div className="divide-y divide-overlay-0 flex flex-col items-center">
                 {track.motifs.map((m) => {
                     return <Motif motif={m} />;

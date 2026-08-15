@@ -78,6 +78,7 @@ export const hasAlbum = (entry: {
 export const TrackActivityResolved = z.object({
     activity: Activity,
     note: z.string().optional(),
+    activitySlug: z.string(),
 });
 
 export type TrackActivityResolved = z.infer<typeof TrackActivityResolved>;

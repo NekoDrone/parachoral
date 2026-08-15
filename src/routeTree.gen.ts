@@ -17,6 +17,7 @@ import { Route as LayoutAlbumsRouteImport } from './routes/_layout/albums'
 import { Route as LayoutMotifsRouteImport } from './routes/_layout/motifs'
 import { Route as LayoutReleasesRouteImport } from './routes/_layout/releases'
 import { Route as LayoutTracksRouteImport } from './routes/_layout/tracks'
+import { Route as LayoutActivityActivitySlugRouteImport } from './routes/_layout/activity/$activitySlug'
 import { Route as LayoutMotifMotifSlugRouteImport } from './routes/_layout/motif/$motifSlug'
 import { Route as LayoutTrackTrackSlugRouteImport } from './routes/_layout/track/$trackSlug'
 
@@ -59,6 +60,12 @@ const LayoutTracksRoute = LayoutTracksRouteImport.update({
   path: '/tracks',
   getParentRoute: () => LayoutRoute,
 } as any)
+const LayoutActivityActivitySlugRoute =
+  LayoutActivityActivitySlugRouteImport.update({
+    id: '/activity/$activitySlug',
+    path: '/activity/$activitySlug',
+    getParentRoute: () => LayoutRoute,
+  } as any)
 const LayoutMotifMotifSlugRoute = LayoutMotifMotifSlugRouteImport.update({
   id: '/motif/$motifSlug',
   path: '/motif/$motifSlug',
@@ -78,6 +85,7 @@ export interface FileRoutesByFullPath {
   '/motifs': typeof LayoutMotifsRoute
   '/releases': typeof LayoutReleasesRoute
   '/tracks': typeof LayoutTracksRoute
+  '/activity/$activitySlug': typeof LayoutActivityActivitySlugRoute
   '/motif/$motifSlug': typeof LayoutMotifMotifSlugRoute
   '/track/$trackSlug': typeof LayoutTrackTrackSlugRoute
 }
@@ -89,6 +97,7 @@ export interface FileRoutesByTo {
   '/releases': typeof LayoutReleasesRoute
   '/tracks': typeof LayoutTracksRoute
   '/': typeof LayoutIndexRoute
+  '/activity/$activitySlug': typeof LayoutActivityActivitySlugRoute
   '/motif/$motifSlug': typeof LayoutMotifMotifSlugRoute
   '/track/$trackSlug': typeof LayoutTrackTrackSlugRoute
 }
@@ -102,6 +111,7 @@ export interface FileRoutesById {
   '/_layout/releases': typeof LayoutReleasesRoute
   '/_layout/tracks': typeof LayoutTracksRoute
   '/_layout/': typeof LayoutIndexRoute
+  '/_layout/activity/$activitySlug': typeof LayoutActivityActivitySlugRoute
   '/_layout/motif/$motifSlug': typeof LayoutMotifMotifSlugRoute
   '/_layout/track/$trackSlug': typeof LayoutTrackTrackSlugRoute
 }
@@ -115,6 +125,7 @@ export interface FileRouteTypes {
     | '/motifs'
     | '/releases'
     | '/tracks'
+    | '/activity/$activitySlug'
     | '/motif/$motifSlug'
     | '/track/$trackSlug'
   fileRoutesByTo: FileRoutesByTo
@@ -126,6 +137,7 @@ export interface FileRouteTypes {
     | '/releases'
     | '/tracks'
     | '/'
+    | '/activity/$activitySlug'
     | '/motif/$motifSlug'
     | '/track/$trackSlug'
   id:
@@ -138,6 +150,7 @@ export interface FileRouteTypes {
     | '/_layout/releases'
     | '/_layout/tracks'
     | '/_layout/'
+    | '/_layout/activity/$activitySlug'
     | '/_layout/motif/$motifSlug'
     | '/_layout/track/$trackSlug'
   fileRoutesById: FileRoutesById
@@ -204,6 +217,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutTracksRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/activity/$activitySlug': {
+      id: '/_layout/activity/$activitySlug'
+      path: '/activity/$activitySlug'
+      fullPath: '/activity/$activitySlug'
+      preLoaderRoute: typeof LayoutActivityActivitySlugRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_layout/motif/$motifSlug': {
       id: '/_layout/motif/$motifSlug'
       path: '/motif/$motifSlug'
@@ -229,6 +249,7 @@ interface LayoutRouteChildren {
   LayoutReleasesRoute: typeof LayoutReleasesRoute
   LayoutTracksRoute: typeof LayoutTracksRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
+  LayoutActivityActivitySlugRoute: typeof LayoutActivityActivitySlugRoute
   LayoutMotifMotifSlugRoute: typeof LayoutMotifMotifSlugRoute
   LayoutTrackTrackSlugRoute: typeof LayoutTrackTrackSlugRoute
 }
@@ -241,6 +262,7 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutReleasesRoute: LayoutReleasesRoute,
   LayoutTracksRoute: LayoutTracksRoute,
   LayoutIndexRoute: LayoutIndexRoute,
+  LayoutActivityActivitySlugRoute: LayoutActivityActivitySlugRoute,
   LayoutMotifMotifSlugRoute: LayoutMotifMotifSlugRoute,
   LayoutTrackTrackSlugRoute: LayoutTrackTrackSlugRoute,
 }

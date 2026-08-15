@@ -18,6 +18,10 @@ albums:
 playsIn:
     - activitySlug: title-screen-d1
       note: The original Destiny title screen theme.
+    - activitySlug: title-screen-edge-of-fate
+      note: The Edge of Fate reuses Guardian as its title screen theme.
+    - activitySlug: title-screen-renegades
+      note: Renegades uses a slight remix of Guardian as its title screen theme.
 motifs:
     - motifSlug: guardian
       origin: true

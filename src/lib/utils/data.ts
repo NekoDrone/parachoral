@@ -8,3 +8,12 @@ export const slugFromPath = (path: string): string => {
     const res = arr[arr.length - 1];
     return res.replace(/\.ya?ml$/, "");
 };
+
+const SOURCE_TYPE_HUMANISE: Record<string, string> = {
+    youtube: "YouTube",
+    spotify: "Spotify",
+    archive: "YouTube (DMA)",
+};
+
+export const humaniseSourceType = (sourceType: string) =>
+    SOURCE_TYPE_HUMANISE[sourceType];

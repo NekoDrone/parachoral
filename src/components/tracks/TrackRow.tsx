@@ -207,7 +207,7 @@ export const TrackRow = ({
                                         <a
                                             key={l.source}
                                             href={l.url}
-                                            className="text-accent hover:text-text transition-colors flex"
+                                            className="hover:text-accent transition-colors flex"
                                             target="_blank"
                                             rel="noreferrer"
                                         >

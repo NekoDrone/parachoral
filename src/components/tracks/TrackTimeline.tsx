@@ -16,8 +16,9 @@ export const TrackTimeline = () => {
     minutes.push(duration);
 
     // if no motif, guarantee rendering track line
-    if (motifs.length === 0)
-        motifs.push({
+    const motifsCopy = [...motifs];
+    if (motifsCopy.length === 0)
+        motifsCopy.push({
             motif: {
                 name: track.title,
                 aka: [],
@@ -54,7 +55,7 @@ export const TrackTimeline = () => {
                     </div>
 
                     <div className="grid grid-cols-[var(--label-w)_1fr] gap-x-(--gap) w-full">
-                        {motifs.map((m) => (
+                        {motifsCopy.map((m) => (
                             <div
                                 key={m.motif.name}
                                 className={

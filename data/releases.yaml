@@ -24,3 +24,11 @@
   name: Rise of Iron
   year: 2016
   shorthand: IRON
+- slug: 26_the-edge-of-fate
+  name: The Edge of Fate
+  year: 2025
+  shorthand: FATE
+- slug: 27_renegades
+  name: Renegades
+  year: 2025
+  shorthand: RNGD
