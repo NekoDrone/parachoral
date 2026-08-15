@@ -15,6 +15,9 @@ links:
 albums:
     - albumSlug: destiny-ost
       track: 6
+playsIn:
+    - activitySlug: title-screen-d1
+      note: The original Destiny title screen theme.
 motifs:
     - motifSlug: guardian
       origin: true
