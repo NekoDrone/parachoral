@@ -13,7 +13,7 @@ export const TrackMotifs = () => {
     const track = Route.useLoaderData();
     return (
         <div>
-            <SectionHead label="The Motifs" num={2} className="w-full mb-2" />
+            <SectionHead label="Motifs" num={2} className="w-full mb-2" />
             <div className="divide-y divide-overlay-0 flex flex-col items-center">
                 {track.motifs.map((m) => {
                     return <Motif motif={m} />;
@@ -66,11 +66,13 @@ const Motif = ({ motif }: { motif: TrackMotifResolved }) => {
                         </span>
                     )}
                 </div>
-                <div className="font-mono text-subtext-0 tracking-wide lowercase text-[11px]"><span>{motif.note}</span></div>
+                <div className="font-mono text-subtext-0 tracking-wide lowercase text-[11px]">
+                    <span>{motif.note}</span>
+                </div>
                 {motif.origin && (
                     <div className="py-1">
                         <span className="font-mono text-xs uppercase text-accent-alt tracking-wide">
-                            Motif's Origin
+                            Origin
                         </span>
                     </div>
                 )}
@@ -96,7 +98,7 @@ const Motif = ({ motif }: { motif: TrackMotifResolved }) => {
                         {backlinkCount} other appearance
                         {backlinkCount > 1 ? "s" : ""}
                     </span>
-                    <ArrowRightIcon size={12}/>
+                    <ArrowRightIcon size={12} />
                 </Link>
             </div>
         </motion.div>

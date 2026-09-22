@@ -43,6 +43,7 @@ const PlaysIn = () => {
                             <span className="text-subtext-1 italic text-sm tracking-wide">
                                 {a.note}
                             </span>{" "}
+                            {/* FIXME: this is pointing to an activity where it should be pointing to a release instead. */}
                             <Link
                                 className="uppercase font-sans tracking-[0.2em] text-[9px] text-subtext-0 py-1 hover:text-accent flex gap-1 items-center"
                                 to="/activity/$activitySlug"
